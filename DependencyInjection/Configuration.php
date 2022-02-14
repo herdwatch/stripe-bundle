@@ -39,6 +39,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                     ->scalarNode('object_manager')->end()
                     ->scalarNode('model_transformer')->end()
+                    ->scalarNode('handler')->cannotBeEmpty()->end()
                     ->arrayNode('model')
                         ->children()
                             ->scalarNode('card')->cannotBeEmpty()->end()

@@ -31,9 +31,21 @@ class MiracodeStripeExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter(
-            'miracode_stripe.secret_key',
+            'miracode_stripe.
+            secret_key',
             $config['secret_key']
         );
+
+        $container->setParameter(
+          'miracode_stripe.process_service',
+          'miracode_stripe.default_handler'
+        );
+        if (isset($config['handler'])) {
+          $container->setParameter(
+            'miracode_stripe.process_service',
+            $config['handler']
+          );
+        }
 
         if (!empty($config['database']) && !empty($config['database']['model'])) {
             if (!empty($config['database']['model_transformer'])) {
