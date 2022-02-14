@@ -9,7 +9,8 @@
                  class="Miracode\StripeBundle\Transformer\AnnotationTransformer">
         </service>
         <service id="miracode_stripe.default_handler"
-                 class="Miracode\StripeBundle\Handler\DefaultHandlerService">
+                 class="Miracode\StripeBundle\Handler\DefaultHandlerService"
+                 public="true">
         </service>
     </services>
 
