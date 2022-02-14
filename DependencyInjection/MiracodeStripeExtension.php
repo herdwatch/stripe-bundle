@@ -31,8 +31,7 @@ class MiracodeStripeExtension extends Extension
         $loader->load('services.xml');
 
         $container->setParameter(
-            'miracode_stripe.
-            secret_key',
+            'miracode_stripe.secret_key',
             $config['secret_key']
         );
 
