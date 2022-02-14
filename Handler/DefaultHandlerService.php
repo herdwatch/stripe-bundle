@@ -3,8 +3,8 @@
 namespace Miracode\StripeBundle\Handler;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Stripe\StripeObject;
 use Stripe\Event;
+use Miracode\StripeBundle\Event\StripeEvent;
 
 class DefaultHandlerService
 {
@@ -23,12 +23,12 @@ class DefaultHandlerService
     }
 
 
-    public function process(Event $stripeEventObject, StripeObject $event): void
+    public function process(Event $stripeEventObject, StripeEvent $event): void
     {
         $this->handle($stripeEventObject, $event);
     }
 
-    public function handle(Event $stripeEventObject, StripeObject $event): void
+    public function handle(Event $stripeEventObject, StripeEvent $event): void
     {
         $this
             ->container
