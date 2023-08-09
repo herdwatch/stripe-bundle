@@ -2,18 +2,10 @@
 
 namespace Miracode\StripeBundle\Annotation;
 
-/**
- * @Annotation
- */
+#[\Attribute]
 class StripeObjectParam
 {
-    /**
-     * @var string
-     */
-    public $name;
-
-    /**
-     * @var string
-     */
-    public $embeddedId;
+    public function __construct(public ?string $name = null, public ?string $embeddedId = null)
+    {
+    }
 }
