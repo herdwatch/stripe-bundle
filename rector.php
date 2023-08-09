@@ -9,7 +9,7 @@ use Rector\Php80\ValueObject\AnnotationToAttribute;
 use Rector\TypeDeclaration\Rector\ClassMethod\AddReturnTypeDeclarationBasedOnParentClassMethodRector;
 
 return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig->cacheDirectory(__DIR__ . '/var/rector/');
+    $rectorConfig->cacheDirectory(__DIR__ . '/.rector-cache/');
     $rectorConfig->parallel(300, intval(getenv('RECTOR_NUM_PROCS') ?: 16));
 
     $rectorConfig->paths([
