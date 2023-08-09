@@ -57,7 +57,9 @@ class AttributeTransformer implements TransformerInterface
         $attributes = $property->getAttributes(StripeObjectParam::class);
         if (count($attributes) > 1) {
             throw new \LogicException('The StripeObjectParam attribute do not allowed to be repeatable');
-        } elseif (count($attributes) === 0) {
+        }
+
+        if (0 === count($attributes)) {
             return null;
         }
 
