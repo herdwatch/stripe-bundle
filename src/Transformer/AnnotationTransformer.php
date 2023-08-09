@@ -10,9 +10,6 @@ use Stripe\StripeObject;
 
 class AnnotationTransformer implements TransformerInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function transform(
         StripeObject $stripeObject,
         StripeModelInterface $model
@@ -46,10 +43,10 @@ class AnnotationTransformer implements TransformerInterface
                         $value = $value[$path];
                     }
                 } else {
-                    if (isset($value->object) &&
-                        $value->object == StripeObjectType::COLLECTION
+                    if (isset($value->object)
+                        && StripeObjectType::COLLECTION == $value->object
                     ) {
-                        $value = array_map(fn(StripeObject $obj) => $obj->toArray(), $value->data);
+                        $value = array_map(fn (StripeObject $obj) => $obj->toArray(), $value->data);
                     } else {
                         $value = $value->toArray();
                     }

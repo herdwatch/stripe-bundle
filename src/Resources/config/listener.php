@@ -12,6 +12,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('miracode_stripe.subscriber.stripe_event', StripeEventSubscriber::class)
         ->tag('kernel.event_subscriber')
         ->args([
-            new ReferenceConfigurator('miracode_stripe.model_manager')
+            new ReferenceConfigurator('miracode_stripe.model_manager'),
         ]);
 };

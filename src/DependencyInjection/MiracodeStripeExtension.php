@@ -2,25 +2,21 @@
 
 namespace Miracode\StripeBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Miracode\StripeBundle\Manager\Doctrine\DoctrineORMModelManager;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader;
 
 /**
- * This is the class that loads and manages your bundle configuration
+ * This is the class that loads and manages your bundle configuration.
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
 class MiracodeStripeExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
@@ -50,11 +46,11 @@ class MiracodeStripeExtension extends Extension
     }
 
     /**
-     * Currently supports only orm driver
+     * Currently supports only orm driver.
      */
     private function configureDatabase(array $config, ContainerBuilder $container): bool
     {
-        if ($config['driver'] !== 'orm') {
+        if ('orm' !== $config['driver']) {
             return false;
         }
 
@@ -70,7 +66,7 @@ class MiracodeStripeExtension extends Extension
         $definition->setArguments([
             new Reference('miracode_stripe.object_manager'),
             new Reference('miracode_stripe.model_transformer'),
-            '%miracode_stripe.model_classes%'
+            '%miracode_stripe.model_classes%',
         ]);
         $definition->setPublic(true);
         $container->setDefinition('miracode_stripe.model_manager', $definition);

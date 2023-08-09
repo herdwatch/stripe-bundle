@@ -22,9 +22,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
         $this->modelManager = $modelManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [
@@ -96,21 +93,21 @@ class StripeEventSubscriber implements EventSubscriberInterface
     public function onStripeChargeEvent(StripeEvent $event)
     {
         $object = $event->getDataObject();
-        //Save charge
+        // Save charge
         if ($this->modelManager->support($object)) {
             $this->modelManager->save($object, true);
         }
-        //Save source if exists
-        if (isset($object->source) &&
-            $object->source instanceof StripeObject
+        // Save source if exists
+        if (isset($object->source)
+            && $object->source instanceof StripeObject
         ) {
             if ($this->modelManager->support($object->source)) {
                 $this->modelManager->save($object->source, true);
             }
         }
-        //Save refunds if exists
-        if (isset($object->refunds) &&
-            $object->refunds instanceof StripeObject
+        // Save refunds if exists
+        if (isset($object->refunds)
+            && $object->refunds instanceof StripeObject
         ) {
             $refunds = $object->refunds;
             if ($refunds->total_count > 0) {

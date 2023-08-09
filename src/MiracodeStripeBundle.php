@@ -2,16 +2,13 @@
 
 namespace Miracode\StripeBundle;
 
-use Stripe\Stripe;
 use Miracode\StripeBundle\DependencyInjection\Compiler\RegisterDoctrineMappingPass;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Stripe\Stripe;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class MiracodeStripeBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
     public function boot()
     {
         Stripe::setApiKey(
@@ -19,9 +16,6 @@ class MiracodeStripeBundle extends Bundle
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container)
     {
         if ($container->hasExtension('doctrine')) {

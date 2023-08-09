@@ -8,36 +8,32 @@ use Stripe\StripeObject;
 interface ModelManagerInterface
 {
     /**
-     * Is stripe object supported by model manager
-     *
-     * @param StripeObject $object
+     * Is stripe object supported by model manager.
      *
      * @return bool
      */
     public function support(StripeObject $object);
 
     /**
-     * Retrieve model by stripe object data
-     *
-     * @param StripeObject $object
+     * Retrieve model by stripe object data.
      *
      * @return StripeModelInterface|null
      */
     public function retrieve(StripeObject $object);
 
     /**
-     * Retrieve model by stripe ID and stripe object type
+     * Retrieve model by stripe ID and stripe object type.
      *
      * @param string $id
      * @param string $objectType
+     *
      * @return StripeModelInterface|null
      */
     public function retrieveByStripeId($id, $objectType);
 
     /**
-     * Save stripe object in database
+     * Save stripe object in database.
      *
-     * @param StripeObject $object
      * @param bool $flush
      *
      * @return StripeModelInterface
@@ -46,9 +42,8 @@ interface ModelManagerInterface
 
     /**
      * Remove model from database by stripe object data
-     * Return model object that was removed or NULL if model does not exists
+     * Return model object that was removed or NULL if model does not exists.
      *
-     * @param StripeObject $object
      * @param bool $flush
      *
      * @return StripeModelInterface|null

@@ -69,7 +69,7 @@ class StripeEvent extends Event
     }
 
     /**
-     * Get stripe event object
+     * Get stripe event object.
      *
      * @return StripeObject
      */
@@ -79,9 +79,10 @@ class StripeEvent extends Event
     }
 
     /**
-     * Get event data object
+     * Get event data object.
      *
      * @return StripeObject
+     *
      * @throws StripeException
      */
     public function getDataObject()

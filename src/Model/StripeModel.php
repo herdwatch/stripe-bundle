@@ -13,7 +13,7 @@ class StripeModel implements StripeModelInterface
     protected $stripeId;
 
     /**
-     * Retrieve stripe object ID
+     * Retrieve stripe object ID.
      *
      * @return string
      */

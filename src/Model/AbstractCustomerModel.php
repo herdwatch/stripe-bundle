@@ -2,8 +2,8 @@
 
 namespace Miracode\StripeBundle\Model;
 
-use Stripe\Customer;
 use Miracode\StripeBundle\Annotation\StripeObjectParam;
+use Stripe\Customer;
 
 abstract class AbstractCustomerModel extends StripeModel
 {

@@ -2,20 +2,18 @@
 
 namespace Miracode\StripeBundle\Handler;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Stripe\Event;
 use Miracode\StripeBundle\Event\StripeEvent;
+use Stripe\Event;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class DefaultHandlerService
 {
-
     /**
      * UserRequestService constructor.
      */
     public function __construct(protected ContainerInterface $container)
     {
     }
-
 
     public function process(Event $stripeEventObject, StripeEvent $event): void
     {

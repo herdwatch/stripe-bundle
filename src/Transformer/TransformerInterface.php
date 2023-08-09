@@ -8,12 +8,7 @@ use Stripe\StripeObject;
 interface TransformerInterface
 {
     /**
-     * Transform stripe object into model
-     *
-     * @param StripeObject $stripeObject
-     * @param StripeModelInterface $model
-     *
-     * @return void
+     * Transform stripe object into model.
      */
     public function transform(
         StripeObject $stripeObject,

@@ -12,6 +12,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->set('miracode_stripe.action.webhook', WebhookAction::class)
         ->public()
         ->args([
-            new ReferenceConfigurator('service_container')
+            new ReferenceConfigurator('service_container'),
         ]);
 };

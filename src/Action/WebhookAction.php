@@ -24,7 +24,7 @@ final readonly class WebhookAction
         if (!isset($requestData->id) || !isset($requestData->object)) {
             throw new BadRequestHttpException('Invalid webhook request data');
         }
-        if ($requestData->object !== StripeObjectType::EVENT) {
+        if (StripeObjectType::EVENT !== $requestData->object) {
             throw new StripeException('Unknown stripe object type in webhook');
         }
         $stripeEventApi = new StripeEventApi();
