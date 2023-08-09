@@ -28,12 +28,18 @@
     },
     "require-dev": {
         "doctrine/orm": ">=2.2",
-        "symfony/yaml": "^5.4"
+        "symfony/yaml": "^5.4",
+        "bamarni/composer-bin-plugin": "^1.8"
     },
     "suggest": {
         "doctrine/orm": "If you want to save stripe data in database"
     },
     "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "target-directory": "vendor-bin",
+            "forward-command": true
+        },
         "branch-alias": {
             "dev-master": "2.0.x-dev"
         },
@@ -57,7 +63,8 @@
     },
     "config": {
         "allow-plugins": {
-            "ocramius/package-versions": true
+            "ocramius/package-versions": true,
+            "bamarni/composer-bin-plugin": true
         }
     }
 }
