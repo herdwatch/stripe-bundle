@@ -2,7 +2,7 @@
 
 namespace Miracode\StripeBundle\Transformer;
 
-use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\ORM\Mapping\Driver\AttributeReader;
 use Miracode\StripeBundle\Annotation\StripeObjectParam;
 use Miracode\StripeBundle\Model\StripeModelInterface;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
@@ -15,11 +15,11 @@ class AttributeTransformer implements TransformerInterface
         StripeModelInterface $model
     ) {
         $r = new \ReflectionObject($model);
-        $annotationReader = new AnnotationReader();
+        $annotationReader = new AttributeReader();
         $props = $r->getProperties();
         foreach ($props as $prop) {
             /** @var StripeObjectParam $stripeObjectParam */
-            $stripeObjectParam = $annotationReader->getPropertyAnnotation(
+            $stripeObjectParam = $annotationReader->getPropertyAttribute(
                 $prop,
                 StripeObjectParam::class
             );
