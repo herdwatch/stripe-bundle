@@ -68,6 +68,7 @@
         "rector": [
             "Composer\\Config::disableProcessTimeout",
             "./vendor-bin/rector/vendor/bin/rector process --no-diffs"
-        ]
+        ],
+        "php-cs-fixer": "./vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --verbose --show-progress=dots"
     }
 }
