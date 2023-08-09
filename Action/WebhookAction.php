@@ -1,26 +1,24 @@
 <?php
 
-namespace Miracode\StripeBundle\Controller;
+namespace Miracode\StripeBundle\Action;
 
 use Miracode\StripeBundle\Event\StripeEvent;
 use Miracode\StripeBundle\Handler\DefaultHandlerService;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
 use Miracode\StripeBundle\StripeException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Psr\Container\ContainerInterface;
+use Stripe\Event as StripeEventApi;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Stripe\Event as StripeEventApi;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class WebhookController extends Controller
+final readonly class WebhookAction
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     * @throws StripeException
-     */
-    public function handleAction(Request $request)
+    public function __construct(private ContainerInterface $container)
+    {
+    }
+
+    public function __invoke(Request $request): Response
     {
         $requestData = json_decode($request->getContent());
         if (!isset($requestData->id) || !isset($requestData->object)) {
@@ -38,7 +36,7 @@ class WebhookController extends Controller
 
         $event = new StripeEvent($stripeEventObject);
         /** @var DefaultHandlerService $service */
-        $service = $this->get($this->getParameter('miracode_stripe.process_service'));
+        $service = $this->container->get($this->container->getParameter('miracode_stripe.process_service'));
         $service->process($stripeEventObject, $event);
 
         return new Response();
