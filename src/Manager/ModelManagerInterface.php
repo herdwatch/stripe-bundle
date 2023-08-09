@@ -51,7 +51,7 @@ interface ModelManagerInterface
      * @param StripeObject $object
      * @param bool $flush
      *
-     * @return \Miracode\StripeBundle\Model\StripeModelInterface|null
+     * @return StripeModelInterface|null
      */
     public function remove(StripeObject $object, $flush = false);
 }

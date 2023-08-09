@@ -16,7 +16,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
 
     /**
      * StripeEventSubscriber constructor.
-     * @param \Miracode\StripeBundle\Manager\ModelManagerInterface $modelManager
      */
     public function __construct(ModelManagerInterface $modelManager)
     {
@@ -86,9 +85,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @param StripeEvent $event
-     */
     public function onStripeEvent(StripeEvent $event)
     {
         $object = $event->getDataObject();
@@ -97,9 +93,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param StripeEvent $event
-     */
     public function onStripeChargeEvent(StripeEvent $event)
     {
         $object = $event->getDataObject();
@@ -130,9 +123,6 @@ class StripeEventSubscriber implements EventSubscriberInterface
         }
     }
 
-    /**
-     * @param StripeEvent $event
-     */
     public function onStripeDeleteEvent(StripeEvent $event)
     {
         $object = $event->getDataObject();

@@ -7,10 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 trait SafeDeleteTrait
 {
     /**
-     * @ORM\Column(name="deleted", type="boolean")
-     *
      * @var bool
      */
+    #[ORM\Column(name: 'deleted', type: 'boolean')]
     protected $deleted = false;
 
     /**

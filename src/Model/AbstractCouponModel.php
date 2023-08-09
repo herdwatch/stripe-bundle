@@ -7,87 +7,75 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractCouponModel extends StripeModel
 {
     /**
-     * @StripeObjectParam(name="amount_off")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'amount_off')]
     protected $amountOff;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $created;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $currency;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $duration;
 
     /**
-     * @StripeObjectParam(name="duration_in_months")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'duration_in_months')]
     protected $durationInMonths;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $livemode;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam(name="max_redemptions")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'max_redemptions')]
     protected $maxRedemptions;
 
     /**
-     * @StripeObjectParam(name="percent_off")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'percent_off')]
     protected $percentOff;
 
     /**
-     * @StripeObjectParam(name="redeem_by")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'redeem_by')]
     protected $redeemBy;
 
     /**
-     * @StripeObjectParam(name="times_redeemed")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'times_redeemed')]
     protected $timesRedeemed;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $valid;
 
     /**

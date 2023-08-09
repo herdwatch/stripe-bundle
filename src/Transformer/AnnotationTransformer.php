@@ -24,7 +24,7 @@ class AnnotationTransformer implements TransformerInterface
             /** @var StripeObjectParam $stripeObjectParam */
             $stripeObjectParam = $annotationReader->getPropertyAnnotation(
                 $prop,
-                "Miracode\StripeBundle\Annotation\StripeObjectParam"
+                StripeObjectParam::class
             );
             if (!$stripeObjectParam) {
                 continue;
@@ -38,7 +38,7 @@ class AnnotationTransformer implements TransformerInterface
             $value = $stripeObject[$name];
             if ($value instanceof StripeObject) {
                 if ($stripeObjectParam->embeddedId) {
-                    $paths = explode('.', $stripeObjectParam->embeddedId);
+                    $paths = explode('.', (string) $stripeObjectParam->embeddedId);
                     foreach ($paths as $path) {
                         if (!isset($value[$path])) {
                             break;
@@ -49,9 +49,7 @@ class AnnotationTransformer implements TransformerInterface
                     if (isset($value->object) &&
                         $value->object == StripeObjectType::COLLECTION
                     ) {
-                        $value = array_map(function(StripeObject $obj) {
-                            return $obj->toArray();
-                        }, $value->data);
+                        $value = array_map(fn(StripeObject $obj) => $obj->toArray(), $value->data);
                     } else {
                         $value = $value->toArray();
                     }

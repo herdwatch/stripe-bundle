@@ -7,150 +7,129 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractSubscriptionModel extends StripeModel
 {
     /**
-     * @StripeObjectParam(name="application_fee_percent")
-     *
      * @var float
      */
+    #[StripeObjectParam(name: 'application_fee_percent')]
     protected $applicationFeePercent;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $billing;
 
     /**
-     * @StripeObjectParam(name="cancel_at_period_end")
-     *
      * @var bool
      */
+    #[StripeObjectParam(name: 'cancel_at_period_end')]
     protected $cancelAtPeriodEnd;
 
     /**
-     * @StripeObjectParam(name="canceled_at")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'canceled_at')]
     protected $canceledAt;
 
     /**
-     * @StripeObjectParam(name="discount", embeddedId="coupon.id")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
     protected $coupon;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $created;
 
     /**
-     * @StripeObjectParam(name="current_period_end")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'current_period_end')]
     protected $currentPeriodEnd;
 
     /**
-     * @StripeObjectParam(name="current_period_start")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'current_period_start')]
     protected $currentPeriodStart;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $customer;
 
     /**
-     * @StripeObjectParam(name="days_until_due")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'days_until_due')]
     protected $daysUntilDue;
 
     /**
-     * @StripeObjectParam(name="ended_at")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'ended_at')]
     protected $endedAt;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $items;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $livemode;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam(embeddedId="id")
-     *
      * @var string
      */
+    #[StripeObjectParam(embeddedId: 'id')]
     protected $plan;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $quantity;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $start;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $status;
 
     /**
-     * @StripeObjectParam(name="tax_percent")
-     *
      * @var float
      */
+    #[StripeObjectParam(name: 'tax_percent')]
     protected $taxPercent;
 
     /**
-     * @StripeObjectParam(name="trial_end")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'trial_end')]
     protected $trialEnd;
 
     /**
-     * @StripeObjectParam(name="trial_start")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'trial_start')]
     protected $trialStart;
 
     /**

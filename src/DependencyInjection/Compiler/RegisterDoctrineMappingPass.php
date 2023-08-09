@@ -14,10 +14,8 @@ class RegisterDoctrineMappingPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $mappings = array(
-            realpath(__DIR__ . '/../../Resources/config/doctrine/model') =>
-                'Miracode\StripeBundle\Model'
-        );
+        $mappings = [realpath(__DIR__ . '/../../Resources/config/doctrine/model') =>
+            'Miracode\StripeBundle\Model'];
 
         DoctrineOrmMappingsPass::createXmlMappingDriver($mappings)
             ->process($container);

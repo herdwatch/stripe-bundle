@@ -2,85 +2,75 @@
 
 namespace Miracode\StripeBundle\Model;
 
+use Stripe\Customer;
 use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractCustomerModel extends StripeModel
 {
     /**
-     * @StripeObjectParam(name="account_balance")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'account_balance')]
     protected $accountBalance;
 
     /**
-     * @StripeObjectParam(name="discount", embeddedId="coupon.id")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
     protected $coupon;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $created;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $currency;
 
     /**
-     * @StripeObjectParam(name="default_source")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'default_source')]
     protected $defaultSource;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $delinquent;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $description;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $email;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $livemode;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $shipping;
 
     /**
@@ -304,10 +294,10 @@ abstract class AbstractCustomerModel extends StripeModel
     }
 
     /**
-     * @return \Stripe\Customer
+     * @return Customer
      */
     public function retrieveStripeObject()
     {
-        return \Stripe\Customer::retrieve($this->getStripeId());
+        return Customer::retrieve($this->getStripeId());
     }
 }

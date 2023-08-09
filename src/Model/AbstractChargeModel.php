@@ -7,59 +7,51 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractChargeModel extends StripeModel
 {
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $amount;
 
     /**
-     * @StripeObjectParam(name="amount_refunded")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'amount_refunded')]
     protected $amountRefunded;
 
     /**
-     * @StripeObjectParam(name="balance_transaction")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'balance_transaction')]
     protected $balanceTransaction;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $captured;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $created;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $currency;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $customer;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $description;
 
     /**
@@ -68,115 +60,99 @@ abstract class AbstractChargeModel extends StripeModel
     protected $dispute;
 
     /**
-     * @StripeObjectParam(name="failure_code")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'failure_code')]
     protected $failureCode;
 
     /**
-     * @StripeObjectParam(name="failure_message")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'failure_message')]
     protected $failureMessage;
 
     /**
-     * @StripeObjectParam(name="fraud_details")
-     *
      * @var array
      */
+    #[StripeObjectParam(name: 'fraud_details')]
     protected $fraudDetails;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $invoice;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $livemode;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $order;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $outcome;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $paid;
 
     /**
-     * @StripeObjectParam(name="receipt_email")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'receipt_email')]
     protected $receiptEmail;
 
     /**
-     * @StripeObjectParam(name="receipt_number")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'receipt_number')]
     protected $receiptNumber;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $refunded;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $shipping;
 
     /**
-     * @StripeObjectParam(embeddedId="id")
-     *
      * @var string
      */
+    #[StripeObjectParam(embeddedId: 'id')]
     protected $source;
 
     /**
-     * @StripeObjectParam(name="statement_descriptor")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'statement_descriptor')]
     protected $statementDescriptor;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $status;
 
     /**

@@ -23,24 +23,16 @@ class DoctrineORMModelManager implements ModelManagerInterface
     protected $modelTransformer;
 
     /**
-     * @var array
-     */
-    protected $modelClasses;
-
-    /**
      * DoctrineORMModelManager constructor.
-     * @param ObjectManager $objectManager
-     * @param TransformerInterface $transformer
      * @param array $modelClasses
      */
     public function __construct(
         ObjectManager $objectManager,
         TransformerInterface $transformer,
-        $modelClasses
+        protected $modelClasses
     ) {
         $this->objectManager = $objectManager;
         $this->modelTransformer = $transformer;
-        $this->modelClasses = $modelClasses;
     }
 
     /**
@@ -140,7 +132,6 @@ class DoctrineORMModelManager implements ModelManagerInterface
     /**
      * Get stripe object type
      *
-     * @param StripeObject $object
      *
      * @return string
      * @throws StripeException
@@ -164,9 +155,8 @@ class DoctrineORMModelManager implements ModelManagerInterface
     /**
      * Check object support
      *
-     * @param \Stripe\StripeObject $object
      *
-     * @throws \Miracode\StripeBundle\StripeException
+     * @throws StripeException
      */
     protected function checkSupport(StripeObject $object)
     {
@@ -183,7 +173,6 @@ class DoctrineORMModelManager implements ModelManagerInterface
     /**
      * Get model class name for specified stripe object
      *
-     * @param StripeObject $object
      *
      * @return string
      */
@@ -195,7 +184,6 @@ class DoctrineORMModelManager implements ModelManagerInterface
     /**
      * Create new model object
      *
-     * @param StripeObject $object
      *
      * @return StripeModelInterface
      */

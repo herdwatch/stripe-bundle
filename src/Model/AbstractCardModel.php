@@ -7,150 +7,129 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractCardModel extends StripeModel
 {
     /**
-     * @StripeObjectParam(name="address_city")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_city')]
     protected $addressCity;
 
     /**
-     * @StripeObjectParam(name="address_country")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_country')]
     protected $addressCountry;
 
     /**
-     * @StripeObjectParam(name="address_line1")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_line1')]
     protected $addressLine1;
 
     /**
-     * @StripeObjectParam(name="address_line1_check")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_line1_check')]
     protected $addressLine1Check;
 
     /**
-     * @StripeObjectParam(name="address_line2")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_line2')]
     protected $addressLine2;
 
     /**
-     * @StripeObjectParam(name="address_state")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_state')]
     protected $addressState;
 
     /**
-     * @StripeObjectParam(name="address_zip")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_zip')]
     protected $addressZip;
 
     /**
-     * @StripeObjectParam(name="address_zip_check")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'address_zip_check')]
     protected $addressZipCheck;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $brand;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $country;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $customer;
 
     /**
-     * @StripeObjectParam(name="cvc_check")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'cvc_check')]
     protected $cvcCheck;
 
     /**
-     * @StripeObjectParam(name="dynamic_last4")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'dynamic_last4')]
     protected $dynamicLast4;
 
     /**
-     * @StripeObjectParam(name="exp_month")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'exp_month')]
     protected $expMonth;
 
     /**
-     * @StripeObjectParam(name="exp_year")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'exp_year')]
     protected $expYear;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $fingerprint;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $funding;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $last4;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $name;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam(name="tokenization_method")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'tokenization_method')]
     protected $tokenizationMethod;
 
     /**

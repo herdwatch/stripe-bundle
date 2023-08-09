@@ -2,6 +2,7 @@
 
 namespace Miracode\StripeBundle;
 
+use Stripe\Stripe;
 use Miracode\StripeBundle\DependencyInjection\Compiler\RegisterDoctrineMappingPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -13,7 +14,7 @@ class MiracodeStripeBundle extends Bundle
      */
     public function boot()
     {
-        \Stripe\Stripe::setApiKey(
+        Stripe::setApiKey(
             $this->container->getParameter('miracode_stripe.secret_key')
         );
     }

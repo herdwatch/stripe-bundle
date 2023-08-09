@@ -7,234 +7,201 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractInvoiceModel extends StripeModel
 {
     /**
-     * @StripeObjectParam(name="amount_due")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'amount_due')]
     protected $amountDue;
 
     /**
-     * @StripeObjectParam(name="application_fee")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'application_fee')]
     protected $applicationFee;
 
     /**
-     * @StripeObjectParam(name="attempt_count")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'attempt_count')]
     protected $attemptCount;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $attempted;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $billing;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $charge;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $closed;
 
     /**
-     * @StripeObjectParam(name="discount", embeddedId="coupon.id")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
     protected $coupon;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $currency;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $customer;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $date;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $description;
 
     /**
-     * @StripeObjectParam(name="due_date")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'due_date')]
     protected $dueDate;
 
     /**
-     * @StripeObjectParam(name="ending_balance")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'ending_balance')]
     protected $endingBalance;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $forgiven;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $lines;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $livemode;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam(name="next_payment_attempt")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'next_payment_attempt')]
     protected $nextPaymentAttempt;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $number;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $paid;
 
     /**
-     * @StripeObjectParam(name="period_end")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'period_end')]
     protected $periodEnd;
 
     /**
-     * @StripeObjectParam(name="period_start")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'period_start')]
     protected $periodStart;
 
     /**
-     * @StripeObjectParam(name="receipt_number")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'receipt_number')]
     protected $receiptNumber;
 
     /**
-     * @StripeObjectParam(name="starting_balance")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'starting_balance')]
     protected $startingBalance;
 
     /**
-     * @StripeObjectParam(name="statement_descriptor")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'statement_descriptor')]
     protected $statementDescriptor;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $subscription;
 
     /**
-     * @StripeObjectParam(name="subscription_proration_date")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'subscription_proration_date')]
     protected $subscriptionProrationDate;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $subtotal;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $tax;
 
     /**
-     * @StripeObjectParam(name="tax_percent")
-     *
      * @var float
      */
+    #[StripeObjectParam(name: 'tax_percent')]
     protected $taxPercent;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $total;
 
     /**
-     * @StripeObjectParam(name="webhooks_delivered_at")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'webhooks_delivered_at')]
     protected $webhooksDeliveredAt;
 
     /**

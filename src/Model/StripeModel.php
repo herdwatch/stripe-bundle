@@ -7,10 +7,9 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 class StripeModel implements StripeModelInterface
 {
     /**
-     * @StripeObjectParam(name="id")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'id')]
     protected $stripeId;
 
     /**

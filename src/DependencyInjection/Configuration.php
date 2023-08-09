@@ -20,7 +20,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder('miracode_stripe');
         $rootNode = $treeBuilder->getRootNode();
 
-        $supportedDrivers = array('orm', /** coming soon) */);
+        $supportedDrivers = ['orm'];
 
         $rootNode
             ->children()

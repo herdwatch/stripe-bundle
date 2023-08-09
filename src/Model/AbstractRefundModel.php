@@ -7,80 +7,69 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractRefundModel extends StripeModel
 {
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $amount;
 
     /**
-     * @StripeObjectParam(name="balance_transaction")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'balance_transaction')]
     protected $balanceTransaction;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $charge;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $created;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $currency;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam(name="failure_balance_transaction")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'failure_balance_transaction')]
     protected $failureBalanceTransaction;
 
     /**
-     * @StripeObjectParam(name="failure_reason")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'failure_reason')]
     protected $failureReason;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $reason;
 
     /**
-     * @StripeObjectParam(name="receipt_number")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'receipt_number')]
     protected $receiptNumber;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $status;
 
     /**

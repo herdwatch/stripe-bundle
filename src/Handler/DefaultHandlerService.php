@@ -9,17 +9,11 @@ use Miracode\StripeBundle\Event\StripeEvent;
 class DefaultHandlerService
 {
 
-    protected ContainerInterface $container;
-
     /**
      * UserRequestService constructor.
-     *
-     * @param ContainerInterface $container
      */
-    public function __construct(ContainerInterface $container
-    )
+    public function __construct(protected ContainerInterface $container)
     {
-      $this->container = $container;
     }
 
 

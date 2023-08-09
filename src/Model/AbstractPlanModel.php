@@ -7,73 +7,63 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractPlanModel extends StripeModel
 {
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $amount;
 
     /**
-     * @StripeObjectParam
-     *
      * @var int
      */
+    #[StripeObjectParam]
     protected $created;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $currency;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $interval;
 
     /**
-     * @StripeObjectParam(name="interval_count")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'interval_count')]
     protected $intervalCount;
 
     /**
-     * @StripeObjectParam
-     *
      * @var bool
      */
+    #[StripeObjectParam]
     protected $livemode;
 
     /**
-     * @StripeObjectParam
-     *
      * @var array
      */
+    #[StripeObjectParam]
     protected $metadata;
 
     /**
-     * @StripeObjectParam
-     *
      * @var string
      */
+    #[StripeObjectParam]
     protected $name;
 
     /**
-     * @StripeObjectParam(name="statement_descriptor")
-     *
      * @var string
      */
+    #[StripeObjectParam(name: 'statement_descriptor')]
     protected $statementDescriptor;
 
     /**
-     * @StripeObjectParam(name="trial_period_days")
-     *
      * @var int
      */
+    #[StripeObjectParam(name: 'trial_period_days')]
     protected $trialPeriodDays;
 
     /**

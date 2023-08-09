@@ -2,6 +2,7 @@
 
 namespace Miracode\StripeBundle\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Miracode\StripeBundle\Manager\Doctrine\DoctrineORMModelManager;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -24,7 +25,7 @@ class MiracodeStripeExtension extends Extension
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
 
-        $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('actions.php');
         $loader->load('transformer.php');
         $loader->load('handler.php');
