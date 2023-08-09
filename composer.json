@@ -41,7 +41,7 @@
             "forward-command": true
         },
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "2.x-dev"
         },
         "symfony": {
             "allow-contrib": false,
