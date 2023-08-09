@@ -22,9 +22,7 @@
         "php": "^8.2",
         "symfony/framework-bundle": "^5.4",
         "symfony/config": "^5.4",
-        "stripe/stripe-php": ">=9.0",
-        "doctrine/common": ">=3.0",
-        "doctrine/annotations": "^2.0"
+        "stripe/stripe-php": ">=9.0"
     },
     "require-dev": {
         "doctrine/orm": ">=2.2",
