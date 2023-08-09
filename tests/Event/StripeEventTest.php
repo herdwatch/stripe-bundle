@@ -3,7 +3,6 @@
 namespace Miracode\StripeBundle\Tests\Event;
 
 use Miracode\StripeBundle\Event\StripeEvent;
-use Miracode\StripeBundle\Stripe\StripeObjectType;
 use PHPUnit\Framework\TestCase;
 use Stripe\StripeObject;
 

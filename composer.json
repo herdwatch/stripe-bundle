@@ -50,15 +50,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Miracode\\StripeBundle\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+            "Miracode\\StripeBundle\\": "src/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
-            "Miracode\\StripeBundle\\Tests\\": "/Tests/"
+            "Miracode\\StripeBundle\\Tests\\": "tests/"
         }
     },
     "config": {

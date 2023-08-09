@@ -2,9 +2,9 @@
 
 namespace Miracode\StripeBundle\Tests\DependencyInjection;
 
+use Miracode\StripeBundle\DependencyInjection\MiracodeStripeExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Miracode\StripeBundle\DependencyInjection\MiracodeStripeExtension;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Yaml\Parser;
 
@@ -50,7 +50,7 @@ class MiracodeStripeExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $this->setDefinition(
             'doctrine.orm.entity_manager',
-            'Miracode\\StripeBundle\\Tests\\Mock\\EntityManagerMock',
+            'Tests\\Mock\\EntityManagerMock',
             $container
         );
         $extension = new MiracodeStripeExtension();
@@ -62,7 +62,7 @@ class MiracodeStripeExtensionTest extends TestCase
         );
         $this->assertTrue($container->has('miracode_stripe.object_manager'));
         $this->assertInstanceOf(
-            'Miracode\\StripeBundle\\Tests\\Mock\\EntityManagerMock',
+            'Tests\\Mock\\EntityManagerMock',
             $container->get('miracode_stripe.object_manager')
         );
         $this->assertTrue($container->has('miracode_stripe.model_manager'));
@@ -83,22 +83,22 @@ class MiracodeStripeExtensionTest extends TestCase
         $container = new ContainerBuilder();
         $this->setDefinition(
             'miracode_stripe.test.entity_manager',
-            'Miracode\\StripeBundle\\Tests\\Mock\\CustomEntityManagerMock',
+            'Tests\\Mock\\CustomEntityManagerMock',
             $container
         );
         $this->setDefinition(
             'miracode_stripe.test.transformer',
-            'Miracode\\StripeBundle\\Tests\\Mock\\TransformerMock',
+            'Tests\\Mock\\TransformerMock',
             $container
         );
         $extension = new MiracodeStripeExtension();
         $extension->load($config, $container);
         $this->assertInstanceOf(
-            'Miracode\\StripeBundle\\Tests\\Mock\\TransformerMock',
+            'Tests\\Mock\\TransformerMock',
             $container->get('miracode_stripe.model_transformer')
         );
         $this->assertInstanceOf(
-            'Miracode\\StripeBundle\\Tests\\Mock\\CustomEntityManagerMock',
+            'Tests\\Mock\\CustomEntityManagerMock',
             $container->get('miracode_stripe.object_manager')
         );
     }
