@@ -66,5 +66,11 @@
             "ocramius/package-versions": true,
             "bamarni/composer-bin-plugin": true
         }
+    },
+    "scripts": {
+        "rector": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor-bin/rector/vendor/bin/rector process --no-diffs"
+        ]
     }
 }
