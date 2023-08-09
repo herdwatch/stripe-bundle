@@ -57,7 +57,7 @@ class MiracodeStripeExtensionTest extends TestCase
         $extension->load($config, $container);
         $this->assertTrue($container->has('miracode_stripe.model_transformer'));
         $this->assertInstanceOf(
-            'Miracode\\StripeBundle\\Transformer\\AnnotationTransformer',
+            'Miracode\\StripeBundle\\Transformer\\AttributeTransformer',
             $container->get('miracode_stripe.model_transformer')
         );
         $this->assertTrue($container->has('miracode_stripe.object_manager'));

@@ -36,7 +36,7 @@ class MiracodeStripeExtension extends Extension
         if (!empty($config['database']) && !empty($config['database']['model'])) {
             $container->setAlias(
                 'miracode_stripe.model_transformer',
-                $config['database']['model_transformer'] ?? 'miracode_stripe.model_transformer.annotation'
+                $config['database']['model_transformer'] ?? 'miracode_stripe.model_transformer.attribute'
             );
 
             if ($this->configureDatabase($config['database'], $container)) {

@@ -8,7 +8,7 @@ use Miracode\StripeBundle\Model\StripeModelInterface;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
 use Stripe\StripeObject;
 
-class AnnotationTransformer implements TransformerInterface
+class AttributeTransformer implements TransformerInterface
 {
     public function transform(
         StripeObject $stripeObject,
