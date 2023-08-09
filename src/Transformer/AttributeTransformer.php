@@ -2,7 +2,6 @@
 
 namespace Miracode\StripeBundle\Transformer;
 
-use Doctrine\ORM\Mapping\Driver\AttributeReader;
 use Miracode\StripeBundle\Annotation\StripeObjectParam;
 use Miracode\StripeBundle\Model\StripeModelInterface;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
@@ -14,20 +13,15 @@ class AttributeTransformer implements TransformerInterface
         StripeObject $stripeObject,
         StripeModelInterface $model
     ) {
-        $r = new \ReflectionObject($model);
-        $annotationReader = new AttributeReader();
-        $props = $r->getProperties();
-        foreach ($props as $prop) {
-            /** @var StripeObjectParam $stripeObjectParam */
-            $stripeObjectParam = $annotationReader->getPropertyAttribute(
-                $prop,
-                StripeObjectParam::class
-            );
+        $properties = (new \ReflectionObject($model))->getProperties();
+        foreach ($properties as $property) {
+            $stripeObjectParam = $this->findObjectParam($property);
             if (!$stripeObjectParam) {
                 continue;
             }
+
             if (!$name = $stripeObjectParam->name) {
-                $name = strtolower($prop->getName());
+                $name = strtolower($property->getName());
             }
             if (!isset($stripeObject[$name])) {
                 continue;
@@ -53,8 +47,20 @@ class AttributeTransformer implements TransformerInterface
                 }
             }
 
-            $setter = 'set' . ucfirst($prop->getName());
+            $setter = 'set' . ucfirst($property->getName());
             call_user_func([$model, $setter], $value);
         }
+    }
+
+    private function findObjectParam(\ReflectionProperty $property): ?StripeObjectParam
+    {
+        $attributes = $property->getAttributes(StripeObjectParam::class);
+        if (count($attributes) > 1) {
+            throw new \LogicException('The StripeObjectParam attribute do not allowed to be repeatable');
+        } elseif (count($attributes) === 0) {
+            return null;
+        }
+
+        return $attributes[0]->newInstance();
     }
 }
