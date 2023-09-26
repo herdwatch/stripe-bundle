@@ -67,7 +67,7 @@ $customer = \Stripe\Customer::create([
 Add bundle routing configuration to enable Stripe webhooks handler
 
 ``` yaml
-# app/config/routing.yml (or config/routing.yaml for Symfony >=3.4)
+# config/routing.yaml
 miracode_stripe:
     resource: '@MiracodeStripeBundle/Resources/config/routing.xml'
 ```
