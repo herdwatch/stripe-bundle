@@ -7,7 +7,7 @@ jobs:
 
   run-tests:
     name: Test PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
-    runs-on: [self-hosted, alpha]
+    runs-on: [self-hosted]
     strategy:
       fail-fast: false
       matrix:
