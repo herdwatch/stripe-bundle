@@ -5,3 +5,5 @@
 /vendor/
 /vendor-bin/**/vendor/
 /.rector-cache/
+.phpunit.result.cache
+/.idea/
