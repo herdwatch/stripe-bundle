@@ -20,8 +20,8 @@
     ],
     "require": {
         "php": ">=7.4.0",
-        "symfony/framework-bundle": "4.4.49 || ^5.4",
-        "symfony/config": "4.4.44 || ^5.4",
+        "symfony/framework-bundle": "^5.4",
+        "symfony/config": "^5.4",
         "stripe/stripe-php": ">=9.0",
         "doctrine/common": ">=3.0"
     },
@@ -29,7 +29,7 @@
         "doctrine/orm": ">=2.2",
         "phpunit/phpunit": "^9.3",
         "symfony/test-pack": "^1.0",
-        "symfony/yaml": "4.4.45 || ^5.4"
+        "symfony/yaml": "^5.4"
     },
     "suggest": {
         "doctrine/orm": "If you want to save stripe data in database"
