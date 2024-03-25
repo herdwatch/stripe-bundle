@@ -56,5 +56,8 @@
         "allow-plugins": {
             "ocramius/package-versions": true
         }
+    },
+    "scripts": {
+        "phpunit": "./vendor/bin/phpunit"
     }
 }
