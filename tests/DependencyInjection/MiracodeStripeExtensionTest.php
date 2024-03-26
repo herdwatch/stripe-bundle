@@ -3,23 +3,27 @@
 namespace Miracode\StripeBundle\Tests\DependencyInjection;
 
 use Miracode\StripeBundle\DependencyInjection\MiracodeStripeExtension;
+use Miracode\StripeBundle\Manager\Doctrine\DoctrineORMModelManager;
+use Miracode\StripeBundle\Tests\Mock\CustomEntityManagerMock;
+use Miracode\StripeBundle\Tests\Mock\EntityManagerMock;
+use Miracode\StripeBundle\Tests\Mock\TransformerMock;
+use Miracode\StripeBundle\Transformer\AttributeTransformer;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Yaml\Parser;
 
 class MiracodeStripeExtensionTest extends TestCase
 {
-    /**
-     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
-     */
-    public function testEmptyConfiguration()
+    public function testEmptyConfiguration(): void
     {
         $extension = new MiracodeStripeExtension();
+        $this->expectException(InvalidConfigurationException::class);
         $extension->load([], new ContainerBuilder());
     }
 
-    public function testStripeSecretKey()
+    public function testStripeSecretKey(): void
     {
         $config = $this->getSimpleConfig();
         $container = new ContainerBuilder();
@@ -31,7 +35,7 @@ class MiracodeStripeExtensionTest extends TestCase
         );
     }
 
-    public function testConfigWithoutDatabase()
+    public function testConfigWithoutDatabase(): void
     {
         $config = $this->getSimpleConfig();
         $container = new ContainerBuilder();
@@ -44,30 +48,30 @@ class MiracodeStripeExtensionTest extends TestCase
         $this->assertFalse($container->hasParameter('miracode_stripe.model_classes'));
     }
 
-    public function testDefaultDatabaseConfiguration()
+    public function testDefaultDatabaseConfiguration(): void
     {
         $config = $this->getSimpleConfigWithDatabase();
         $container = new ContainerBuilder();
         $this->setDefinition(
             'doctrine.orm.entity_manager',
-            'Tests\\Mock\\EntityManagerMock',
+            EntityManagerMock::class,
             $container
         );
         $extension = new MiracodeStripeExtension();
         $extension->load($config, $container);
         $this->assertTrue($container->has('miracode_stripe.model_transformer'));
         $this->assertInstanceOf(
-            'Miracode\\StripeBundle\\Transformer\\AttributeTransformer',
+            AttributeTransformer::class,
             $container->get('miracode_stripe.model_transformer')
         );
         $this->assertTrue($container->has('miracode_stripe.object_manager'));
         $this->assertInstanceOf(
-            'Tests\\Mock\\EntityManagerMock',
+            EntityManagerMock::class,
             $container->get('miracode_stripe.object_manager')
         );
         $this->assertTrue($container->has('miracode_stripe.model_manager'));
         $this->assertInstanceOf(
-            'Miracode\\StripeBundle\\Manager\\Doctrine\\DoctrineORMModelManager',
+            DoctrineORMModelManager::class,
             $container->get('miracode_stripe.model_manager')
         );
         $this->assertEquals(
@@ -77,28 +81,28 @@ class MiracodeStripeExtensionTest extends TestCase
         $this->assertTrue($container->has('miracode_stripe.subscriber.stripe_event'));
     }
 
-    public function testFullConfiguration()
+    public function testFullConfiguration(): void
     {
         $config = $this->getFullConfig();
         $container = new ContainerBuilder();
         $this->setDefinition(
             'miracode_stripe.test.entity_manager',
-            'Tests\\Mock\\CustomEntityManagerMock',
+            CustomEntityManagerMock::class,
             $container
         );
         $this->setDefinition(
             'miracode_stripe.test.transformer',
-            'Tests\\Mock\\TransformerMock',
+            TransformerMock::class,
             $container
         );
         $extension = new MiracodeStripeExtension();
         $extension->load($config, $container);
         $this->assertInstanceOf(
-            'Tests\\Mock\\TransformerMock',
+            TransformerMock::class,
             $container->get('miracode_stripe.model_transformer')
         );
         $this->assertInstanceOf(
-            'Tests\\Mock\\CustomEntityManagerMock',
+            CustomEntityManagerMock::class,
             $container->get('miracode_stripe.object_manager')
         );
     }
@@ -109,9 +113,7 @@ class MiracodeStripeExtensionTest extends TestCase
 miracode_stripe:
     secret_key: some_secret_key
 EOF;
-        $parser = new Parser();
-
-        return $parser->parse($yaml);
+        return (new Parser())->parse($yaml);
     }
 
     protected function getSimpleConfigWithDatabase()
@@ -123,9 +125,7 @@ miracode_stripe:
         model:
             customer: Miracode\StripeBundle\Tests\TestModel\TestCustomer
 EOF;
-        $parser = new Parser();
-
-        return $parser->parse($yaml);
+        return (new Parser())->parse($yaml);
     }
 
     protected function getFullConfig()
@@ -140,12 +140,10 @@ miracode_stripe:
         model:
             customer: Miracode\StripeBundle\Tests\TestModel\TestCustomer
 EOF;
-        $parser = new Parser();
-
-        return $parser->parse($yaml);
+        return (new Parser())->parse($yaml);
     }
 
-    protected function setDefinition($id, $class, ContainerBuilder $container)
+    protected function setDefinition($id, $class, ContainerBuilder $container): void
     {
         $definition = new Definition();
         $definition->setClass($class);

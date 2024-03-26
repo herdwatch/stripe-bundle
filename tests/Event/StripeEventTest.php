@@ -3,18 +3,19 @@
 namespace Miracode\StripeBundle\Tests\Event;
 
 use Miracode\StripeBundle\Event\StripeEvent;
+use Miracode\StripeBundle\StripeException;
 use PHPUnit\Framework\TestCase;
 use Stripe\StripeObject;
 
 class StripeEventTest extends TestCase
 {
-    public function testEvent()
+    public function testEvent(): void
     {
         $event = new StripeEvent(new StripeObject('test_id'));
         $this->assertEquals('test_id', $event->getEvent()->id);
     }
 
-    public function testEventObjectData()
+    public function testEventObjectData(): void
     {
         $object = new StripeObject();
         $object->data = new StripeObject();
@@ -24,12 +25,10 @@ class StripeEventTest extends TestCase
         $this->assertEquals('test_id', $event->getDataObject()->id);
     }
 
-    /**
-     * @expectedException Miracode\StripeBundle\StripeException
-     */
-    public function testEventEmptyObject()
+    public function testEventEmptyObject(): void
     {
         $event = new StripeEvent(new StripeObject());
+        $this->expectException(StripeException::class);
         $event->getDataObject();
     }
 }
