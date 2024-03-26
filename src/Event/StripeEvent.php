@@ -10,13 +10,16 @@ class StripeEvent extends Event
 {
     final public const CHARGE_CAPTURED = 'stripe.charge.captured';
     final public const CHARGE_FAILED = 'stripe.charge.failed';
-    final public const CHARGE_PENDING = 'charge.pending';
+    final public const CHARGE_PENDING = 'stripe.charge.pending';
+    final public const CHARGE_REFUND_UPDATED = 'stripe.charge.refund.updated';
     final public const CHARGE_REFUNDED = 'stripe.charge.refunded';
     final public const CHARGE_SUCCEEDED = 'stripe.charge.succeeded';
     final public const CHARGE_UPDATED = 'stripe.charge.updated';
     final public const COUPON_CREATED = 'stripe.coupon.created';
     final public const COUPON_DELETED = 'stripe.coupon.deleted';
     final public const COUPON_UPDATED = 'stripe.coupon.updated';
+    final public const CHECKOUT_SESSION_COMPLETED = 'stripe.checkout.session.completed';
+    final public const CHECKOUT_SESSION_EXPIRED = 'stripe.checkout.session.expired';
     final public const CUSTOMER_CREATED = 'stripe.customer.created';
     final public const CUSTOMER_DELETED = 'stripe.customer.deleted';
     final public const CUSTOMER_UPDATED = 'stripe.customer.updated';
@@ -36,6 +39,7 @@ class StripeEvent extends Event
     final public const INVOICE_SENT = 'stripe.invoice.sent';
     final public const INVOICE_UPCOMING = 'stripe.invoice.upcoming';
     final public const INVOICE_UPDATED = 'stripe.invoice.updated';
+    final public const MANDATE_UPDATED = 'stripe.mandate.updated';
     final public const PLAN_CREATED = 'stripe.plan.created';
     final public const PLAN_DELETED = 'stripe.plan.deleted';
     final public const PLAN_UPDATED = 'stripe.plan.updated';
