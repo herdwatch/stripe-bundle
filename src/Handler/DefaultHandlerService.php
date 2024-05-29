@@ -8,11 +8,9 @@ use Stripe\Event;
 
 class DefaultHandlerService implements StripeHandlerInterface
 {
-    /**
-     * UserRequestService constructor.
-     */
-    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        private readonly EventDispatcherInterface $eventDispatcher
+    ){
     }
 
     public function process(Event $stripeEventObject, StripeEvent $event): void
