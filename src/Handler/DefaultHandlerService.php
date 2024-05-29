@@ -6,12 +6,12 @@ use Miracode\StripeBundle\Event\StripeEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Stripe\Event;
 
-readonly class DefaultHandlerService implements StripeHandlerInterface
+class DefaultHandlerService implements StripeHandlerInterface
 {
     /**
      * UserRequestService constructor.
      */
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
     {
     }
 
