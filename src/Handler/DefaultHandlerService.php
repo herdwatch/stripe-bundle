@@ -10,7 +10,7 @@ class DefaultHandlerService implements StripeHandlerInterface
 {
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher
-    ){
+    ) {
     }
 
     public function process(Event $stripeEventObject, StripeEvent $event): void

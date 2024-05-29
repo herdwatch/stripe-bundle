@@ -26,8 +26,7 @@ final readonly class WebhookAction
     public function __construct(
         private ContainerInterface $container,
         private DefaultHandlerService $defaultHandlerService
-    )
-    {
+    ) {
     }
 
     /**
