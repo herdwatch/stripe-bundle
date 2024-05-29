@@ -24,7 +24,8 @@ class MiracodeStripeExtension extends Extension
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('actions.php');
         $loader->load('transformer.php');
-
+        $loader->load('services.xml');
+        
         $container->setParameter('miracode_stripe.secret_key', $config['secret_key']);
         $container->setParameter('miracode_stripe.process_service', 'miracode_stripe.default_handler');
 
