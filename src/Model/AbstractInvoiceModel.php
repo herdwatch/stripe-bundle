@@ -6,498 +6,285 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractInvoiceModel extends StripeModel
 {
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'amount_due')]
-    protected $amountDue;
+    protected ?int $amountDue = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'application_fee')]
-    protected $applicationFee;
+    protected ?int $applicationFee = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'attempt_count')]
-    protected $attemptCount;
+    protected int $attemptCount = 0;
 
-    /**
-     * @var bool
-     */
     #[StripeObjectParam]
-    protected $attempted;
+    protected bool $attempted = false;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $billing;
+    protected ?string $billing = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $charge;
+    protected ?string $charge = null;
 
-    /**
-     * @var bool
-     */
     #[StripeObjectParam]
-    protected $closed;
+    protected bool $closed = false;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
-    protected $coupon;
+    protected ?string $coupon = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $currency;
+    protected ?string $currency = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $customer;
+    protected ?string $customer = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $date;
+    protected ?int $date = 0;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $description;
+    protected ?string $description = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'due_date')]
-    protected $dueDate;
+    protected ?int $dueDate = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'ending_balance')]
-    protected $endingBalance;
+    protected ?int $endingBalance = null;
+
+    #[StripeObjectParam]
+    protected bool $forgiven = false;
 
     /**
-     * @var bool
+     * @var array<int, mixed>|null
      */
     #[StripeObjectParam]
-    protected $forgiven;
+    protected ?array $lines = null;
+
+    #[StripeObjectParam]
+    protected bool $livemode = false;
 
     /**
-     * @var array
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $lines;
+    protected ?array $metadata = null;
 
-    /**
-     * @var bool
-     */
-    #[StripeObjectParam]
-    protected $livemode;
-
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $metadata;
-
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'next_payment_attempt')]
-    protected $nextPaymentAttempt;
+    protected ?int $nextPaymentAttempt = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $number;
+    protected ?string $number = null;
 
-    /**
-     * @var bool
-     */
     #[StripeObjectParam]
-    protected $paid;
+    protected bool $paid = false;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'period_end')]
-    protected $periodEnd;
+    protected ?int $periodEnd = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'period_start')]
-    protected $periodStart;
+    protected ?int $periodStart = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'receipt_number')]
-    protected $receiptNumber;
+    protected ?string $receiptNumber = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'starting_balance')]
-    protected $startingBalance;
+    protected ?int $startingBalance = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'statement_descriptor')]
-    protected $statementDescriptor;
+    protected ?string $statementDescriptor = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $subscription;
+    protected ?string $subscription = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'subscription_proration_date')]
-    protected $subscriptionProrationDate;
+    protected ?int $subscriptionProrationDate = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $subtotal;
+    protected ?int $subtotal = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $tax;
+    protected ?int $tax = null;
 
-    /**
-     * @var float
-     */
     #[StripeObjectParam(name: 'tax_percent')]
-    protected $taxPercent;
+    protected ?float $taxPercent = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $total;
+    protected ?int $total = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'webhooks_delivered_at')]
-    protected $webhooksDeliveredAt;
+    protected ?int $webhooksDeliveredAt = null;
 
-    /**
-     * @return int
-     */
-    public function getAmountDue()
+    public function getAmountDue(): ?int
     {
         return $this->amountDue;
     }
 
-    /**
-     * @param int $amountDue
-     *
-     * @return $this
-     */
-    public function setAmountDue($amountDue)
+    public function setAmountDue(?int $amountDue): static
     {
         $this->amountDue = $amountDue;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getApplicationFee()
+    public function getApplicationFee(): ?int
     {
         return $this->applicationFee;
     }
 
-    /**
-     * @param int $applicationFee
-     *
-     * @return $this
-     */
-    public function setApplicationFee($applicationFee)
+    public function setApplicationFee(?int $applicationFee): static
     {
         $this->applicationFee = $applicationFee;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getAttemptCount()
+    public function getAttemptCount(): int
     {
         return $this->attemptCount;
     }
 
-    /**
-     * @param int $attemptCount
-     *
-     * @return $this
-     */
-    public function setAttemptCount($attemptCount)
+    public function setAttemptCount(int $attemptCount): static
     {
         $this->attemptCount = $attemptCount;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isAttempted()
+    public function isAttempted(): bool
     {
         return $this->attempted;
     }
 
-    /**
-     * @param bool $attempted
-     *
-     * @return $this
-     */
-    public function setAttempted($attempted)
+    public function setAttempted(bool $attempted): static
     {
         $this->attempted = $attempted;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBilling()
+    public function getBilling(): ?string
     {
         return $this->billing;
     }
 
-    /**
-     * @param string $billing
-     *
-     * @return $this
-     */
-    public function setBilling($billing)
+    public function setBilling(?string $billing): static
     {
         $this->billing = $billing;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCharge()
+    public function getCharge(): ?string
     {
         return $this->charge;
     }
 
-    /**
-     * @param string $charge
-     *
-     * @return $this
-     */
-    public function setCharge($charge)
+    public function setCharge(?string $charge): static
     {
         $this->charge = $charge;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isClosed()
+    public function isClosed(): bool
     {
         return $this->closed;
     }
 
-    /**
-     * @param bool $closed
-     *
-     * @return $this
-     */
-    public function setClosed($closed)
+    public function setClosed(bool $closed): static
     {
         $this->closed = $closed;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCoupon()
+    public function getCoupon(): ?string
     {
         return $this->coupon;
     }
 
-    /**
-     * @param string $coupon
-     *
-     * @return $this
-     */
-    public function setCoupon($coupon)
+    public function setCoupon(?string $coupon): static
     {
         $this->coupon = $coupon;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): static
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCustomer()
+    public function getCustomer(): ?string
     {
         return $this->customer;
     }
 
-    /**
-     * @param string $customer
-     *
-     * @return $this
-     */
-    public function setCustomer($customer)
+    public function setCustomer(?string $customer): static
     {
         $this->customer = $customer;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getDate()
+    public function getDate(): ?int
     {
         return $this->date;
     }
 
-    /**
-     * @param int $date
-     *
-     * @return $this
-     */
-    public function setDate($date)
+    public function setDate(?int $date): static
     {
         $this->date = $date;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getDueDate()
+    public function getDueDate(): ?int
     {
         return $this->dueDate;
     }
 
-    /**
-     * @param int $dueDate
-     *
-     * @return $this
-     */
-    public function setDueDate($dueDate)
+    public function setDueDate(?int $dueDate): static
     {
         $this->dueDate = $dueDate;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getEndingBalance()
+    public function getEndingBalance(): ?int
     {
         return $this->endingBalance;
     }
 
-    /**
-     * @param int $endingBalance
-     *
-     * @return $this
-     */
-    public function setEndingBalance($endingBalance)
+    public function setEndingBalance(?int $endingBalance): static
     {
         $this->endingBalance = $endingBalance;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isForgiven()
+    public function isForgiven(): bool
     {
         return $this->forgiven;
     }
 
-    /**
-     * @param bool $forgiven
-     *
-     * @return $this
-     */
-    public function setForgiven($forgiven)
+    public function setForgiven(bool $forgiven): static
     {
         $this->forgiven = $forgiven;
 
@@ -505,39 +292,29 @@ abstract class AbstractInvoiceModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<int, mixed>|null
      */
-    public function getLines()
+    public function getLines(): ?array
     {
         return $this->lines;
     }
 
     /**
-     * @param array $lines
-     *
-     * @return $this
+     * @param array<int, mixed>|null $lines
      */
-    public function setLines($lines)
+    public function setLines(?array $lines): static
     {
         $this->lines = $lines;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isLivemode()
+    public function isLivemode(): bool
     {
         return $this->livemode;
     }
 
-    /**
-     * @param bool $livemode
-     *
-     * @return $this
-     */
-    public function setLivemode($livemode)
+    public function setLivemode(bool $livemode): static
     {
         $this->livemode = $livemode;
 
@@ -545,319 +322,199 @@ abstract class AbstractInvoiceModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $metadata
+     * @param array<string, mixed>|null $metadata
      *
      * @return $this
      */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getNextPaymentAttempt()
+    public function getNextPaymentAttempt(): ?int
     {
         return $this->nextPaymentAttempt;
     }
 
-    /**
-     * @param int $nextPaymentAttempt
-     *
-     * @return $this
-     */
-    public function setNextPaymentAttempt($nextPaymentAttempt)
+    public function setNextPaymentAttempt(?int $nextPaymentAttempt): static
     {
         $this->nextPaymentAttempt = $nextPaymentAttempt;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getNumber()
+    public function getNumber(): ?string
     {
         return $this->number;
     }
 
-    /**
-     * @param string $number
-     *
-     * @return $this
-     */
-    public function setNumber($number)
+    public function setNumber(?string $number): static
     {
         $this->number = $number;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isPaid()
+    public function isPaid(): bool
     {
         return $this->paid;
     }
 
-    /**
-     * @param bool $paid
-     *
-     * @return $this
-     */
-    public function setPaid($paid)
+    public function setPaid(bool $paid): static
     {
         $this->paid = $paid;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPeriodEnd()
+    public function getPeriodEnd(): ?int
     {
         return $this->periodEnd;
     }
 
-    /**
-     * @param int $periodEnd
-     *
-     * @return $this
-     */
-    public function setPeriodEnd($periodEnd)
+    public function setPeriodEnd(?int $periodEnd): static
     {
         $this->periodEnd = $periodEnd;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPeriodStart()
+    public function getPeriodStart(): ?int
     {
         return $this->periodStart;
     }
 
-    /**
-     * @param int $periodStart
-     *
-     * @return $this
-     */
-    public function setPeriodStart($periodStart)
+    public function setPeriodStart(?int $periodStart): static
     {
         $this->periodStart = $periodStart;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReceiptNumber()
+    public function getReceiptNumber(): ?string
     {
         return $this->receiptNumber;
     }
 
-    /**
-     * @param string $receiptNumber
-     *
-     * @return $this
-     */
-    public function setReceiptNumber($receiptNumber)
+    public function setReceiptNumber(?string $receiptNumber): static
     {
         $this->receiptNumber = $receiptNumber;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getStartingBalance()
+    public function getStartingBalance(): ?int
     {
         return $this->startingBalance;
     }
 
-    /**
-     * @param int $startingBalance
-     *
-     * @return $this
-     */
-    public function setStartingBalance($startingBalance)
+    public function setStartingBalance(?int $startingBalance): static
     {
         $this->startingBalance = $startingBalance;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStatementDescriptor()
+    public function getStatementDescriptor(): ?string
     {
         return $this->statementDescriptor;
     }
 
-    /**
-     * @param string $statementDescriptor
-     *
-     * @return $this
-     */
-    public function setStatementDescriptor($statementDescriptor)
+    public function setStatementDescriptor(?string $statementDescriptor): static
     {
         $this->statementDescriptor = $statementDescriptor;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getSubscription()
+    public function getSubscription(): ?string
     {
         return $this->subscription;
     }
 
-    /**
-     * @param string $subscription
-     *
-     * @return $this
-     */
-    public function setSubscription($subscription)
+    public function setSubscription(?string $subscription): static
     {
         $this->subscription = $subscription;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getSubscriptionProrationDate()
+    public function getSubscriptionProrationDate(): ?int
     {
         return $this->subscriptionProrationDate;
     }
 
-    /**
-     * @param int $subscriptionProrationDate
-     *
-     * @return $this
-     */
-    public function setSubscriptionProrationDate($subscriptionProrationDate)
+    public function setSubscriptionProrationDate(?int $subscriptionProrationDate): static
     {
         $this->subscriptionProrationDate = $subscriptionProrationDate;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getSubtotal()
+    public function getSubtotal(): ?int
     {
         return $this->subtotal;
     }
 
-    /**
-     * @param int $subtotal
-     *
-     * @return $this
-     */
-    public function setSubtotal($subtotal)
+    public function setSubtotal(?int $subtotal): static
     {
         $this->subtotal = $subtotal;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTax()
+    public function getTax(): ?int
     {
         return $this->tax;
     }
 
-    /**
-     * @param int $tax
-     *
-     * @return $this
-     */
-    public function setTax($tax)
+    public function setTax(?int $tax): static
     {
         $this->tax = $tax;
 
         return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getTaxPercent()
+    public function getTaxPercent(): ?float
     {
         return $this->taxPercent;
     }
 
-    /**
-     * @param float $taxPercent
-     *
-     * @return $this
-     */
-    public function setTaxPercent($taxPercent)
+    public function setTaxPercent(?float $taxPercent): static
     {
         $this->taxPercent = $taxPercent;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTotal()
+    public function getTotal(): ?int
     {
         return $this->total;
     }
 
-    /**
-     * @param int $total
-     *
-     * @return $this
-     */
-    public function setTotal($total)
+    public function setTotal(?int $total): static
     {
         $this->total = $total;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getWebhooksDeliveredAt()
+    public function getWebhooksDeliveredAt(): ?int
     {
         return $this->webhooksDeliveredAt;
     }
 
-    /**
-     * @param int $webhooksDeliveredAt
-     *
-     * @return $this
-     */
-    public function setWebhooksDeliveredAt($webhooksDeliveredAt)
+    public function setWebhooksDeliveredAt(?int $webhooksDeliveredAt): static
     {
         $this->webhooksDeliveredAt = $webhooksDeliveredAt;
 

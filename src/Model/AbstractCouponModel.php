@@ -6,192 +6,111 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractCouponModel extends StripeModel
 {
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'amount_off')]
-    protected $amountOff;
+    protected ?int $amountOff = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $created;
+    protected int $created = 0;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $currency;
+    protected ?string $currency = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $duration;
+    protected ?string $duration = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'duration_in_months')]
-    protected $durationInMonths;
+    protected ?int $durationInMonths = null;
+
+    #[StripeObjectParam]
+    protected bool $livemode = false;
 
     /**
-     * @var bool
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $livemode;
+    protected ?array $metadata = null;
 
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $metadata;
-
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'max_redemptions')]
-    protected $maxRedemptions;
+    protected ?int $maxRedemptions = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'percent_off')]
-    protected $percentOff;
+    protected ?int $percentOff = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'redeem_by')]
-    protected $redeemBy;
+    protected ?int $redeemBy = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'times_redeemed')]
-    protected $timesRedeemed;
+    protected ?int $timesRedeemed = null;
 
-    /**
-     * @var bool
-     */
     #[StripeObjectParam]
-    protected $valid;
+    protected bool $valid = false;
 
-    /**
-     * @return int
-     */
-    public function getAmountOff()
+    public function getAmountOff(): ?int
     {
         return $this->amountOff;
     }
 
-    /**
-     * @param int $amountOff
-     *
-     * @return $this
-     */
-    public function setAmountOff($amountOff)
+    public function setAmountOff(?int $amountOff): static
     {
         $this->amountOff = $amountOff;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCreated()
+    public function getCreated(): int
     {
         return $this->created;
     }
 
-    /**
-     * @param int $created
-     *
-     * @return $this
-     */
-    public function setCreated($created)
+    public function setCreated(int $created): static
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): static
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDuration()
+    public function getDuration(): ?string
     {
         return $this->duration;
     }
 
-    /**
-     * @param string $duration
-     *
-     * @return $this
-     */
-    public function setDuration($duration)
+    public function setDuration(?string $duration): static
     {
         $this->duration = $duration;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getDurationInMonths()
+    public function getDurationInMonths(): ?int
     {
         return $this->durationInMonths;
     }
 
-    /**
-     * @param int $durationInMonths
-     *
-     * @return $this
-     */
-    public function setDurationInMonths($durationInMonths)
+    public function setDurationInMonths(?int $durationInMonths): static
     {
         $this->durationInMonths = $durationInMonths;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isLivemode()
+    public function isLivemode(): bool
     {
         return $this->livemode;
     }
 
-    /**
-     * @param bool $livemode
-     *
-     * @return $this
-     */
-    public function setLivemode($livemode)
+    public function setLivemode(bool $livemode): static
     {
         $this->livemode = $livemode;
 
@@ -199,119 +118,74 @@ abstract class AbstractCouponModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
-    /**
-     * @param array $metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getMaxRedemptions()
+    public function getMaxRedemptions(): ?int
     {
         return $this->maxRedemptions;
     }
 
-    /**
-     * @param int $maxRedemptions
-     *
-     * @return $this
-     */
-    public function setMaxRedemptions($maxRedemptions)
+    public function setMaxRedemptions(?int $maxRedemptions): static
     {
         $this->maxRedemptions = $maxRedemptions;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getPercentOff()
+    public function getPercentOff(): ?int
     {
         return $this->percentOff;
     }
 
-    /**
-     * @param int $percentOff
-     *
-     * @return $this
-     */
-    public function setPercentOff($percentOff)
+    public function setPercentOff(?int $percentOff): static
     {
         $this->percentOff = $percentOff;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getRedeemBy()
+    public function getRedeemBy(): ?int
     {
         return $this->redeemBy;
     }
 
-    /**
-     * @param int $redeemBy
-     *
-     * @return $this
-     */
-    public function setRedeemBy($redeemBy)
+    public function setRedeemBy(?int $redeemBy): static
     {
         $this->redeemBy = $redeemBy;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTimesRedeemed()
+    public function getTimesRedeemed(): ?int
     {
         return $this->timesRedeemed;
     }
 
-    /**
-     * @param int $timesRedeemed
-     *
-     * @return $this
-     */
-    public function setTimesRedeemed($timesRedeemed)
+    public function setTimesRedeemed(?int $timesRedeemed): static
     {
         $this->timesRedeemed = $timesRedeemed;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isValid()
+    public function isValid(): bool
     {
         return $this->valid;
     }
 
-    /**
-     * @param bool $valid
-     *
-     * @return $this
-     */
-    public function setValid($valid)
+    public function setValid(bool $valid): static
     {
         $this->valid = $valid;
 

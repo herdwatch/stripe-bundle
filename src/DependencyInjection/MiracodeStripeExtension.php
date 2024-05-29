@@ -33,6 +33,16 @@ class MiracodeStripeExtension extends Extension
             $container->setParameter('miracode_stripe.process_service', $config['handler']);
         }
 
+        $container->setParameter(
+            'miracode_stripe.webhook_secret',
+            $config['webhook_secret']
+        );
+
+        $container->setParameter(
+            'miracode_stripe.api_version',
+            $config['api_version']
+        );
+
         if (!empty($config['database']) && !empty($config['database']['model'])) {
             $container->setAlias(
                 'miracode_stripe.model_transformer',

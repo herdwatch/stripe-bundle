@@ -6,166 +6,96 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractRefundModel extends StripeModel
 {
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $amount;
+    protected ?int $amount = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'balance_transaction')]
-    protected $balanceTransaction;
+    protected ?string $balanceTransaction = null;
+
+    #[StripeObjectParam]
+    protected ?string $charge = null;
+
+    #[StripeObjectParam]
+    protected int $created = 0;
+
+    #[StripeObjectParam]
+    protected ?string $currency = null;
 
     /**
-     * @var string
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $charge;
+    protected ?array $metadata = null;
 
-    /**
-     * @var int
-     */
-    #[StripeObjectParam]
-    protected $created;
-
-    /**
-     * @var string
-     */
-    #[StripeObjectParam]
-    protected $currency;
-
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $metadata;
-
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'failure_balance_transaction')]
-    protected $failureBalanceTransaction;
+    protected ?string $failureBalanceTransaction = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'failure_reason')]
-    protected $failureReason;
+    protected ?string $failureReason = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $reason;
+    protected ?string $reason = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'receipt_number')]
-    protected $receiptNumber;
+    protected ?string $receiptNumber = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $status;
+    protected ?string $status = null;
 
-    /**
-     * @return int
-     */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return $this
-     */
-    public function setAmount($amount)
+    public function setAmount(?int $amount): static
     {
         $this->amount = $amount;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBalanceTransaction()
+    public function getBalanceTransaction(): ?string
     {
         return $this->balanceTransaction;
     }
 
-    /**
-     * @param string $balanceTransaction
-     *
-     * @return $this
-     */
-    public function setBalanceTransaction($balanceTransaction)
+    public function setBalanceTransaction(?string $balanceTransaction): static
     {
         $this->balanceTransaction = $balanceTransaction;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCharge()
+    public function getCharge(): ?string
     {
         return $this->charge;
     }
 
-    /**
-     * @param string $charge
-     *
-     * @return $this
-     */
-    public function setCharge($charge)
+    public function setCharge(?string $charge): static
     {
         $this->charge = $charge;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCreated()
+    public function getCreated(): int
     {
         return $this->created;
     }
 
-    /**
-     * @param int $created
-     *
-     * @return $this
-     */
-    public function setCreated($created)
+    public function setCreated(int $created): static
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): static
     {
         $this->currency = $currency;
 
@@ -173,119 +103,77 @@ abstract class AbstractRefundModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $metadata
-     *
-     * @return $this
+     * @param array<string, mixed>|null $metadata
      */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFailureBalanceTransaction()
+    public function getFailureBalanceTransaction(): ?string
     {
         return $this->failureBalanceTransaction;
     }
 
-    /**
-     * @param string $failureBalanceTransaction
-     *
-     * @return $this
-     */
-    public function setFailureBalanceTransaction($failureBalanceTransaction)
+    public function setFailureBalanceTransaction(?string $failureBalanceTransaction): static
     {
         $this->failureBalanceTransaction = $failureBalanceTransaction;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFailureReason()
+    public function getFailureReason(): ?string
     {
         return $this->failureReason;
     }
 
-    /**
-     * @param string $failureReason
-     *
-     * @return $this
-     */
-    public function setFailureReason($failureReason)
+    public function setFailureReason(?string $failureReason): static
     {
         $this->failureReason = $failureReason;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReason()
+    public function getReason(): ?string
     {
         return $this->reason;
     }
 
-    /**
-     * @param string $reason
-     *
-     * @return $this
-     */
-    public function setReason($reason)
+    public function setReason(?string $reason): static
     {
         $this->reason = $reason;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getReceiptNumber()
+    public function getReceiptNumber(): ?string
     {
         return $this->receiptNumber;
     }
 
-    /**
-     * @param string $receiptNumber
-     *
-     * @return $this
-     */
-    public function setReceiptNumber($receiptNumber)
+    public function setReceiptNumber(?string $receiptNumber): static
     {
         $this->receiptNumber = $receiptNumber;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatus($status)
+    public function setStatus(?string $status): static
     {
         $this->status = $status;
 

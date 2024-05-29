@@ -3,15 +3,15 @@
 namespace Miracode\StripeBundle\Handler;
 
 use Miracode\StripeBundle\Event\StripeEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Stripe\Event;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class DefaultHandlerService
+readonly class DefaultHandlerService implements StripeHandlerInterface
 {
     /**
      * UserRequestService constructor.
      */
-    public function __construct(protected ContainerInterface $container)
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
     {
     }
 
@@ -22,9 +22,6 @@ class DefaultHandlerService
 
     public function handle(Event $stripeEventObject, StripeEvent $event): void
     {
-        $this
-            ->container
-            ->get('event_dispatcher')
-            ->dispatch($event, 'stripe.' . $stripeEventObject->type);
+        $this->eventDispatcher->dispatch($event, 'stripe.' . $stripeEventObject->type);
     }
 }

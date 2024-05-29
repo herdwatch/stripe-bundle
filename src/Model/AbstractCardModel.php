@@ -6,506 +6,294 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractCardModel extends StripeModel
 {
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_city')]
-    protected $addressCity;
+    protected ?string $addressCity = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_country')]
-    protected $addressCountry;
+    protected ?string $addressCountry = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_line1')]
-    protected $addressLine1;
+    protected ?string $addressLine1 = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_line1_check')]
-    protected $addressLine1Check;
+    protected ?string $addressLine1Check = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_line2')]
-    protected $addressLine2;
+    protected ?string $addressLine2 = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_state')]
-    protected $addressState;
+    protected ?string $addressState = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_zip')]
-    protected $addressZip;
+    protected ?string $addressZip = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'address_zip_check')]
-    protected $addressZipCheck;
+    protected ?string $addressZipCheck = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $brand;
+    protected ?string $brand = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $country;
+    protected ?string $country = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $customer;
+    protected ?string $customer = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'cvc_check')]
-    protected $cvcCheck;
+    protected ?string $cvcCheck = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'dynamic_last4')]
-    protected $dynamicLast4;
+    protected ?string $dynamicLast4 = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'exp_month')]
-    protected $expMonth;
+    protected ?int $expMonth = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'exp_year')]
-    protected $expYear;
+    protected ?int $expYear = null;
+
+    #[StripeObjectParam]
+    protected ?string $fingerprint = null;
+
+    #[StripeObjectParam]
+    protected ?string $funding = null;
+
+    #[StripeObjectParam]
+    protected ?string $last4 = null;
+
+    #[StripeObjectParam]
+    protected ?string $name = null;
 
     /**
-     * @var string
+     * @var array<string, mixed>
      */
     #[StripeObjectParam]
-    protected $fingerprint;
+    protected ?array $metadata = null;
 
-    /**
-     * @var string
-     */
-    #[StripeObjectParam]
-    protected $funding;
-
-    /**
-     * @var string
-     */
-    #[StripeObjectParam]
-    protected $last4;
-
-    /**
-     * @var string
-     */
-    #[StripeObjectParam]
-    protected $name;
-
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $metadata;
-
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'tokenization_method')]
-    protected $tokenizationMethod;
+    protected ?string $tokenizationMethod = null;
 
-    /**
-     * @return string
-     */
-    public function getAddressCity()
+    public function getAddressCity(): ?string
     {
         return $this->addressCity;
     }
 
-    /**
-     * @param string $addressCity
-     *
-     * @return $this
-     */
-    public function setAddressCity($addressCity)
+    public function setAddressCity(?string $addressCity): static
     {
         $this->addressCity = $addressCity;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressCountry()
+    public function getAddressCountry(): ?string
     {
         return $this->addressCountry;
     }
 
-    /**
-     * @param string $addressCountry
-     *
-     * @return $this
-     */
-    public function setAddressCountry($addressCountry)
+    public function setAddressCountry(?string $addressCountry): static
     {
         $this->addressCountry = $addressCountry;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressLine1()
+    public function getAddressLine1(): ?string
     {
         return $this->addressLine1;
     }
 
-    /**
-     * @param string $addressLine1
-     *
-     * @return $this
-     */
-    public function setAddressLine1($addressLine1)
+    public function setAddressLine1(?string $addressLine1): static
     {
         $this->addressLine1 = $addressLine1;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressLine1Check()
+    public function getAddressLine1Check(): ?string
     {
         return $this->addressLine1Check;
     }
 
-    /**
-     * @param string $addressLine1Check
-     *
-     * @return $this
-     */
-    public function setAddressLine1Check($addressLine1Check)
+    public function setAddressLine1Check(?string $addressLine1Check): static
     {
         $this->addressLine1Check = $addressLine1Check;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressLine2()
+    public function getAddressLine2(): ?string
     {
         return $this->addressLine2;
     }
 
-    /**
-     * @param string $addressLine2
-     *
-     * @return $this
-     */
-    public function setAddressLine2($addressLine2)
+    public function setAddressLine2(?string $addressLine2): static
     {
         $this->addressLine2 = $addressLine2;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressState()
+    public function getAddressState(): ?string
     {
         return $this->addressState;
     }
 
-    /**
-     * @param string $addressState
-     *
-     * @return $this
-     */
-    public function setAddressState($addressState)
+    public function setAddressState(?string $addressState): static
     {
         $this->addressState = $addressState;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressZip()
+    public function getAddressZip(): ?string
     {
         return $this->addressZip;
     }
 
-    /**
-     * @param string $addressZip
-     *
-     * @return $this
-     */
-    public function setAddressZip($addressZip)
+    public function setAddressZip(?string $addressZip): static
     {
         $this->addressZip = $addressZip;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getAddressZipCheck()
+    public function getAddressZipCheck(): ?string
     {
         return $this->addressZipCheck;
     }
 
-    /**
-     * @param string $addressZipCheck
-     *
-     * @return $this
-     */
-    public function setAddressZipCheck($addressZipCheck)
+    public function setAddressZipCheck(?string $addressZipCheck): static
     {
         $this->addressZipCheck = $addressZipCheck;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBrand()
+    public function getBrand(): ?string
     {
         return $this->brand;
     }
 
-    /**
-     * @param string $brand
-     *
-     * @return $this
-     */
-    public function setBrand($brand)
+    public function setBrand(?string $brand): static
     {
         $this->brand = $brand;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCountry()
+    public function getCountry(): ?string
     {
         return $this->country;
     }
 
-    /**
-     * @param string $country
-     *
-     * @return $this
-     */
-    public function setCountry($country)
+    public function setCountry(?string $country): static
     {
         $this->country = $country;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCustomer()
+    public function getCustomer(): ?string
     {
         return $this->customer;
     }
 
-    /**
-     * @param string $customer
-     *
-     * @return $this
-     */
-    public function setCustomer($customer)
+    public function setCustomer(?string $customer): static
     {
         $this->customer = $customer;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCvcCheck()
+    public function getCvcCheck(): ?string
     {
         return $this->cvcCheck;
     }
 
-    /**
-     * @param string $cvcCheck
-     *
-     * @return $this
-     */
-    public function setCvcCheck($cvcCheck)
+    public function setCvcCheck(?string $cvcCheck): static
     {
         $this->cvcCheck = $cvcCheck;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDynamicLast4()
+    public function getDynamicLast4(): ?string
     {
         return $this->dynamicLast4;
     }
 
-    /**
-     * @param string $dynamicLast4
-     *
-     * @return $this
-     */
-    public function setDynamicLast4($dynamicLast4)
+    public function setDynamicLast4(?string $dynamicLast4): static
     {
         $this->dynamicLast4 = $dynamicLast4;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getExpMonth()
+    public function getExpMonth(): ?int
     {
         return $this->expMonth;
     }
 
-    /**
-     * @param int $expMonth
-     *
-     * @return $this
-     */
-    public function setExpMonth($expMonth)
+    public function setExpMonth(?int $expMonth): static
     {
         $this->expMonth = $expMonth;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getExpYear()
+    public function getExpYear(): ?int
     {
         return $this->expYear;
     }
 
-    /**
-     * @param int $expYear
-     *
-     * @return $this
-     */
-    public function setExpYear($expYear)
+    public function setExpYear(?int $expYear): static
     {
         $this->expYear = $expYear;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFingerprint()
+    public function getFingerprint(): ?string
     {
         return $this->fingerprint;
     }
 
-    /**
-     * @param string $fingerprint
-     *
-     * @return $this
-     */
-    public function setFingerprint($fingerprint)
+    public function setFingerprint(?string $fingerprint): static
     {
         $this->fingerprint = $fingerprint;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getFunding()
+    public function getFunding(): ?string
     {
         return $this->funding;
     }
 
-    /**
-     * @param string $funding
-     *
-     * @return $this
-     */
-    public function setFunding($funding)
+    public function setFunding(?string $funding): static
     {
         $this->funding = $funding;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLast4()
+    public function getLast4(): ?string
     {
         return $this->last4;
     }
 
-    /**
-     * @param string $last4
-     *
-     * @return $this
-     */
-    public function setLast4($last4)
+    public function setLast4(?string $last4): static
     {
         $this->last4 = $last4;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -513,39 +301,29 @@ abstract class AbstractCardModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $metadata
-     *
-     * @return $this
+     * @param array<string, mixed>|null $metadata
      */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getTokenizationMethod()
+    public function getTokenizationMethod(): ?string
     {
         return $this->tokenizationMethod;
     }
 
-    /**
-     * @param string $tokenizationMethod
-     *
-     * @return $this
-     */
-    public function setTokenizationMethod($tokenizationMethod)
+    public function setTokenizationMethod(?string $tokenizationMethod): static
     {
         $this->tokenizationMethod = $tokenizationMethod;
 

@@ -4,25 +4,23 @@ namespace Miracode\StripeBundle\EventListener;
 
 use Miracode\StripeBundle\Event\StripeEvent;
 use Miracode\StripeBundle\Manager\ModelManagerInterface;
+use Miracode\StripeBundle\StripeException;
 use Stripe\StripeObject;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class StripeEventSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var ModelManagerInterface
-     */
-    protected $modelManager;
-
-    /**
      * StripeEventSubscriber constructor.
      */
-    public function __construct(ModelManagerInterface $modelManager)
+    public function __construct(private readonly ModelManagerInterface $modelManager)
     {
-        $this->modelManager = $modelManager;
     }
 
-    public static function getSubscribedEvents()
+    /**
+     * @return array<string, string>
+     */
+    public static function getSubscribedEvents(): array
     {
         return [
             StripeEvent::CHARGE_CAPTURED => 'onStripeChargeEvent',
@@ -82,7 +80,10 @@ class StripeEventSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function onStripeEvent(StripeEvent $event)
+    /**
+     * @throws StripeException
+     */
+    public function onStripeEvent(StripeEvent $event): void
     {
         $object = $event->getDataObject();
         if ($this->modelManager->support($object)) {
@@ -90,7 +91,10 @@ class StripeEventSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onStripeChargeEvent(StripeEvent $event)
+    /**
+     * @throws StripeException
+     */
+    public function onStripeChargeEvent(StripeEvent $event): void
     {
         $object = $event->getDataObject();
         // Save charge
@@ -100,10 +104,9 @@ class StripeEventSubscriber implements EventSubscriberInterface
         // Save source if exists
         if (isset($object->source)
             && $object->source instanceof StripeObject
+            && $this->modelManager->support($object->source)
         ) {
-            if ($this->modelManager->support($object->source)) {
-                $this->modelManager->save($object->source, true);
-            }
+            $this->modelManager->save($object->source, true);
         }
         // Save refunds if exists
         if (isset($object->refunds)
@@ -120,7 +123,10 @@ class StripeEventSubscriber implements EventSubscriberInterface
         }
     }
 
-    public function onStripeDeleteEvent(StripeEvent $event)
+    /**
+     * @throws StripeException
+     */
+    public function onStripeDeleteEvent(StripeEvent $event): void
     {
         $object = $event->getDataObject();
         if ($this->modelManager->support($object)) {

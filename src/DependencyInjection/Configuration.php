@@ -12,7 +12,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('miracode_stripe');
         $rootNode = $treeBuilder->getRootNode();
@@ -21,9 +21,15 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+            ->scalarNode('api_version')
+            ->defaultNull()
+            ->end()
             ->scalarNode('secret_key')
             ->isRequired()
             ->cannotBeEmpty()
+            ->end()
+            ->scalarNode('webhook_secret')
+            ->defaultNull()
             ->end()
             ->scalarNode('handler')
             ->cannotBeEmpty()
