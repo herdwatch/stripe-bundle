@@ -5,8 +5,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="miracode.default_webhook.handler" class="Miracode\StripeBundle\Handler\DefaultHandlerService" public="true">
+        <service id="Miracode\StripeBundle\Handler\DefaultHandlerService">
             <argument type="service" id="event_dispatcher" />
         </service>
+        <service id="Miracode\StripeBundle\Handler\StripeHandlerInterface" alias="Miracode\StripeBundle\Handler\DefaultHandlerService"/>
     </services>
 </container>
