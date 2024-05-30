@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Miracode\StripeBundle\Action\WebhookAction;
+use Psr\Log\LoggerInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
     $containerConfigurator->services()
@@ -14,5 +15,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([
             new ReferenceConfigurator('service_container'),
             new ReferenceConfigurator('miracode.default_webhook.handler'),
+            new ReferenceConfigurator(LoggerInterface::class),
         ]);
 };

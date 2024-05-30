@@ -9,6 +9,7 @@ use Miracode\StripeBundle\Stripe\StripeObjectType;
 use Miracode\StripeBundle\StripeException;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Psr\Log\LoggerInterface;
 use Stripe\Event as StripeEventApi;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\SignatureVerificationException;
@@ -17,7 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 final readonly class WebhookAction
 {
@@ -26,7 +26,8 @@ final readonly class WebhookAction
 
     public function __construct(
         private ContainerInterface $container,
-        private DefaultHandlerService $defaultHandlerService
+        private DefaultHandlerService $defaultHandlerService,
+        private LoggerInterface $logger
     ) {
     }
 
@@ -69,7 +70,8 @@ final readonly class WebhookAction
 
             return new Response();
         } catch (StripeException $stripeException) {
-            throw new MethodNotAllowedHttpException([$stripeException->getMessage()]);
+            $this->logger->warning($stripeException->getMessage());
+            throw new BadRequestHttpException();
         }
     }
 
