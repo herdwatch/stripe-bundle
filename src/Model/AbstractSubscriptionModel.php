@@ -6,346 +6,201 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractSubscriptionModel extends StripeModel
 {
-    /**
-     * @var float
-     */
     #[StripeObjectParam(name: 'application_fee_percent')]
-    protected $applicationFeePercent;
+    protected ?float $applicationFeePercent = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $billing;
+    protected ?string $billing = null;
 
-    /**
-     * @var bool
-     */
     #[StripeObjectParam(name: 'cancel_at_period_end')]
-    protected $cancelAtPeriodEnd;
+    protected bool $cancelAtPeriodEnd = false;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'canceled_at')]
-    protected $canceledAt;
+    protected ?int $canceledAt = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
-    protected $coupon;
+    protected ?string $coupon = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $created;
+    protected int $created = 0;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'current_period_end')]
-    protected $currentPeriodEnd;
+    protected ?int $currentPeriodEnd = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'current_period_start')]
-    protected $currentPeriodStart;
+    protected ?int $currentPeriodStart = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $customer;
+    protected ?string $customer = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'days_until_due')]
-    protected $daysUntilDue;
+    protected ?int $daysUntilDue = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'ended_at')]
-    protected $endedAt;
+    protected ?int $endedAt = null;
 
     /**
-     * @var array
+     * @var array<int, mixed>|null
      */
     #[StripeObjectParam]
-    protected $items;
+    protected ?array $items = null;
+
+    #[StripeObjectParam]
+    protected bool $livemode = false;
 
     /**
-     * @var bool
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $livemode;
+    protected ?array $metadata = null;
 
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $metadata;
-
-    /**
-     * @var string
-     */
     #[StripeObjectParam(embeddedId: 'id')]
-    protected $plan;
+    protected ?string $plan = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $quantity;
+    protected ?int $quantity = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $start;
+    protected ?int $start = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $status;
+    protected ?string $status = null;
 
-    /**
-     * @var float
-     */
     #[StripeObjectParam(name: 'tax_percent')]
-    protected $taxPercent;
+    protected ?float $taxPercent = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'trial_end')]
-    protected $trialEnd;
+    protected ?int $trialEnd = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'trial_start')]
-    protected $trialStart;
+    protected ?int $trialStart = null;
 
-    /**
-     * @return float
-     */
-    public function getApplicationFeePercent()
+    public function getApplicationFeePercent(): ?float
     {
         return $this->applicationFeePercent;
     }
 
-    /**
-     * @param float $applicationFeePercent
-     *
-     * @return $this
-     */
-    public function setApplicationFeePercent($applicationFeePercent)
+    public function setApplicationFeePercent(?float $applicationFeePercent): static
     {
         $this->applicationFeePercent = $applicationFeePercent;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getBilling()
+    public function getBilling(): ?string
     {
         return $this->billing;
     }
 
-    /**
-     * @param string $billing
-     *
-     * @return $this
-     */
-    public function setBilling($billing)
+    public function setBilling(?string $billing): static
     {
         $this->billing = $billing;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isCancelAtPeriodEnd()
+    public function isCancelAtPeriodEnd(): bool
     {
         return $this->cancelAtPeriodEnd;
     }
 
-    /**
-     * @param bool $cancelAtPeriodEnd
-     *
-     * @return $this
-     */
-    public function setCancelAtPeriodEnd($cancelAtPeriodEnd)
+    public function setCancelAtPeriodEnd(bool $cancelAtPeriodEnd): static
     {
         $this->cancelAtPeriodEnd = $cancelAtPeriodEnd;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCanceledAt()
+    public function getCanceledAt(): ?int
     {
         return $this->canceledAt;
     }
 
-    /**
-     * @param int $canceledAt
-     *
-     * @return $this
-     */
-    public function setCanceledAt($canceledAt)
+    public function setCanceledAt(?int $canceledAt): static
     {
         $this->canceledAt = $canceledAt;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCoupon()
+    public function getCoupon(): ?string
     {
         return $this->coupon;
     }
 
-    /**
-     * @param string $coupon
-     *
-     * @return $this
-     */
-    public function setCoupon($coupon)
+    public function setCoupon(?string $coupon): static
     {
         $this->coupon = $coupon;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCreated()
+    public function getCreated(): int
     {
         return $this->created;
     }
 
-    /**
-     * @param int $created
-     *
-     * @return $this
-     */
-    public function setCreated($created)
+    public function setCreated(int $created): static
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCurrentPeriodEnd()
+    public function getCurrentPeriodEnd(): ?int
     {
         return $this->currentPeriodEnd;
     }
 
-    /**
-     * @param int $currentPeriodEnd
-     *
-     * @return $this
-     */
-    public function setCurrentPeriodEnd($currentPeriodEnd)
+    public function setCurrentPeriodEnd(?int $currentPeriodEnd): static
     {
         $this->currentPeriodEnd = $currentPeriodEnd;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCurrentPeriodStart()
+    public function getCurrentPeriodStart(): ?int
     {
         return $this->currentPeriodStart;
     }
 
-    /**
-     * @param int $currentPeriodStart
-     *
-     * @return $this
-     */
-    public function setCurrentPeriodStart($currentPeriodStart)
+    public function setCurrentPeriodStart(?int $currentPeriodStart): static
     {
         $this->currentPeriodStart = $currentPeriodStart;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCustomer()
+    public function getCustomer(): ?string
     {
         return $this->customer;
     }
 
-    /**
-     * @param string $customer
-     *
-     * @return $this
-     */
-    public function setCustomer($customer)
+    public function setCustomer(?string $customer): static
     {
         $this->customer = $customer;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getDaysUntilDue()
+    public function getDaysUntilDue(): ?int
     {
         return $this->daysUntilDue;
     }
 
-    /**
-     * @param int $daysUntilDue
-     *
-     * @return $this
-     */
-    public function setDaysUntilDue($daysUntilDue)
+    public function setDaysUntilDue(?int $daysUntilDue): static
     {
         $this->daysUntilDue = $daysUntilDue;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getEndedAt()
+    public function getEndedAt(): ?int
     {
         return $this->endedAt;
     }
 
-    /**
-     * @param int $endedAt
-     *
-     * @return $this
-     */
-    public function setEndedAt($endedAt)
+    public function setEndedAt(?int $endedAt): static
     {
         $this->endedAt = $endedAt;
 
@@ -353,39 +208,29 @@ abstract class AbstractSubscriptionModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<int, mixed>|null
      */
-    public function getItems()
+    public function getItems(): ?array
     {
         return $this->items;
     }
 
     /**
-     * @param array $items
-     *
-     * @return $this
+     * @param array<int, mixed>|null $items
      */
-    public function setItems($items)
+    public function setItems(?array $items): static
     {
         $this->items = $items;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isLivemode()
+    public function isLivemode(): bool
     {
         return $this->livemode;
     }
 
-    /**
-     * @param bool $livemode
-     *
-     * @return $this
-     */
-    public function setLivemode($livemode)
+    public function setLivemode(bool $livemode): static
     {
         $this->livemode = $livemode;
 
@@ -393,159 +238,101 @@ abstract class AbstractSubscriptionModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $metadata
-     *
-     * @return $this
+     * @param array<string, mixed>|null $metadata
      */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPlan()
+    public function getPlan(): ?string
     {
         return $this->plan;
     }
 
-    /**
-     * @param string $plan
-     *
-     * @return $this
-     */
-    public function setPlan($plan)
+    public function setPlan(?string $plan): static
     {
         $this->plan = $plan;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getQuantity()
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
 
-    /**
-     * @param int $quantity
-     *
-     * @return $this
-     */
-    public function setQuantity($quantity)
+    public function setQuantity(?int $quantity): static
     {
         $this->quantity = $quantity;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getStart()
+    public function getStart(): ?int
     {
         return $this->start;
     }
 
-    /**
-     * @param int $start
-     *
-     * @return $this
-     */
-    public function setStart($start)
+    public function setStart(?int $start): static
     {
         $this->start = $start;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStatus()
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     *
-     * @return $this
-     */
-    public function setStatus($status)
+    public function setStatus(?string $status): static
     {
         $this->status = $status;
 
         return $this;
     }
 
-    /**
-     * @return float
-     */
-    public function getTaxPercent()
+    public function getTaxPercent(): ?float
     {
         return $this->taxPercent;
     }
 
-    /**
-     * @param float $taxPercent
-     *
-     * @return $this
-     */
-    public function setTaxPercent($taxPercent)
+    public function setTaxPercent(?float $taxPercent): static
     {
         $this->taxPercent = $taxPercent;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTrialEnd()
+    public function getTrialEnd(): ?int
     {
         return $this->trialEnd;
     }
 
-    /**
-     * @param int $trialEnd
-     *
-     * @return $this
-     */
-    public function setTrialEnd($trialEnd)
+    public function setTrialEnd(?int $trialEnd): static
     {
         $this->trialEnd = $trialEnd;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTrialStart()
+    public function getTrialStart(): ?int
     {
         return $this->trialStart;
     }
 
-    /**
-     * @param int $trialStart
-     *
-     * @return $this
-     */
-    public function setTrialStart($trialStart)
+    public function setTrialStart(?int $trialStart): static
     {
         $this->trialStart = $trialStart;
 

@@ -6,8 +6,6 @@ interface SafeDeleteModelInterface
 {
     /**
      * Set deleted flag.
-     *
-     * @param bool $deleted
      */
-    public function setDeleted($deleted = true);
+    public function setDeleted(bool $deleted = true);
 }

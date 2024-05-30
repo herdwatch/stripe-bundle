@@ -6,8 +6,6 @@ interface StripeModelInterface
 {
     /**
      * Retrieve stripe object ID.
-     *
-     * return string
      */
-    public function getStripeId();
+    public function getStripeId(): ?string;
 }

@@ -6,28 +6,18 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 class StripeModel implements StripeModelInterface
 {
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'id')]
-    protected $stripeId;
+    protected ?string $stripeId = null;
 
     /**
      * Retrieve stripe object ID.
-     *
-     * @return string
      */
-    public function getStripeId()
+    public function getStripeId(): ?string
     {
         return $this->stripeId;
     }
 
-    /**
-     * @param string $stripeId
-     *
-     * @return $this
-     */
-    public function setStripeId($stripeId)
+    public function setStripeId(?string $stripeId): static
     {
         $this->stripeId = $stripeId;
 

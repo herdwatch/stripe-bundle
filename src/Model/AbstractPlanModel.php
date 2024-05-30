@@ -6,180 +6,105 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 
 abstract class AbstractPlanModel extends StripeModel
 {
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $amount;
+    protected ?int $amount = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $created;
+    protected int $created = 0;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $currency;
+    protected ?string $currency = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $interval;
+    protected ?string $interval = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'interval_count')]
-    protected $intervalCount;
+    protected ?int $intervalCount = null;
+
+    #[StripeObjectParam]
+    protected bool $livemode = false;
 
     /**
-     * @var bool
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $livemode;
+    protected ?array $metadata = null;
 
-    /**
-     * @var array
-     */
     #[StripeObjectParam]
-    protected $metadata;
+    protected ?string $name = null;
 
-    /**
-     * @var string
-     */
-    #[StripeObjectParam]
-    protected $name;
-
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'statement_descriptor')]
-    protected $statementDescriptor;
+    protected ?string $statementDescriptor = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'trial_period_days')]
-    protected $trialPeriodDays;
+    protected ?int $trialPeriodDays = null;
 
-    /**
-     * @return int
-     */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    /**
-     * @param int $amount
-     *
-     * @return $this
-     */
-    public function setAmount($amount)
+    public function setAmount(?int $amount): static
     {
         $this->amount = $amount;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCreated()
+    public function getCreated(): int
     {
         return $this->created;
     }
 
-    /**
-     * @param int $created
-     *
-     * @return $this
-     */
-    public function setCreated($created)
+    public function setCreated(int $created): static
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): static
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getInterval()
+    public function getInterval(): ?string
     {
         return $this->interval;
     }
 
-    /**
-     * @param string $interval
-     *
-     * @return $this
-     */
-    public function setInterval($interval)
+    public function setInterval(?string $interval): static
     {
         $this->interval = $interval;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getIntervalCount()
+    public function getIntervalCount(): ?int
     {
         return $this->intervalCount;
     }
 
-    /**
-     * @param int $intervalCount
-     *
-     * @return $this
-     */
-    public function setIntervalCount($intervalCount)
+    public function setIntervalCount(?int $intervalCount): static
     {
         $this->intervalCount = $intervalCount;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isLivemode()
+    public function isLivemode(): bool
     {
         return $this->livemode;
     }
 
-    /**
-     * @param bool $livemode
-     *
-     * @return $this
-     */
-    public function setLivemode($livemode)
+    public function setLivemode(bool $livemode): static
     {
         $this->livemode = $livemode;
 
@@ -187,79 +112,53 @@ abstract class AbstractPlanModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $metadata
-     *
-     * @return $this
+     * @param array<string, mixed>|null $metadata
      */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName($name)
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getStatementDescriptor()
+    public function getStatementDescriptor(): ?string
     {
         return $this->statementDescriptor;
     }
 
-    /**
-     * @param string $statementDescriptor
-     *
-     * @return $this
-     */
-    public function setStatementDescriptor($statementDescriptor)
+    public function setStatementDescriptor(?string $statementDescriptor): static
     {
         $this->statementDescriptor = $statementDescriptor;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getTrialPeriodDays()
+    public function getTrialPeriodDays(): ?int
     {
         return $this->trialPeriodDays;
     }
 
-    /**
-     * @param int $trialPeriodDays
-     *
-     * @return $this
-     */
-    public function setTrialPeriodDays($trialPeriodDays)
+    public function setTrialPeriodDays(?int $trialPeriodDays): static
     {
         $this->trialPeriodDays = $trialPeriodDays;
 

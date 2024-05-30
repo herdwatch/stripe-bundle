@@ -4,249 +4,151 @@ namespace Miracode\StripeBundle\Model;
 
 use Miracode\StripeBundle\Annotation\StripeObjectParam;
 use Stripe\Customer;
+use Stripe\Exception\ApiErrorException;
 
 abstract class AbstractCustomerModel extends StripeModel
 {
-    /**
-     * @var int
-     */
     #[StripeObjectParam(name: 'account_balance')]
-    protected $accountBalance;
+    protected ?int $accountBalance = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
-    protected $coupon;
+    protected ?string $coupon = null;
 
-    /**
-     * @var int
-     */
     #[StripeObjectParam]
-    protected $created;
+    protected int $created = 0;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam]
-    protected $currency;
+    protected ?string $currency = null;
 
-    /**
-     * @var string
-     */
     #[StripeObjectParam(name: 'default_source')]
-    protected $defaultSource;
+    protected ?string $defaultSource = null;
+
+    #[StripeObjectParam]
+    protected ?string $delinquent = null;
+
+    #[StripeObjectParam]
+    protected ?string $description = null;
+
+    #[StripeObjectParam]
+    protected ?string $email = null;
+
+    #[StripeObjectParam]
+    protected bool $livemode = false;
 
     /**
-     * @var bool
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $delinquent;
+    protected ?array $metadata = null;
 
     /**
-     * @var string
+     * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
-    protected $description;
+    protected ?array $shipping = null;
 
-    /**
-     * @var string
-     */
-    #[StripeObjectParam]
-    protected $email;
-
-    /**
-     * @var bool
-     */
-    #[StripeObjectParam]
-    protected $livemode;
-
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $metadata;
-
-    /**
-     * @var array
-     */
-    #[StripeObjectParam]
-    protected $shipping;
-
-    /**
-     * @return int
-     */
-    public function getAccountBalance()
+    public function getAccountBalance(): ?int
     {
         return $this->accountBalance;
     }
 
-    /**
-     * @param int $accountBalance
-     *
-     * @return $this
-     */
-    public function setAccountBalance($accountBalance)
+    public function setAccountBalance(?int $accountBalance): static
     {
         $this->accountBalance = $accountBalance;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCoupon()
+    public function getCoupon(): ?string
     {
         return $this->coupon;
     }
 
-    /**
-     * @param string $coupon
-     *
-     * @return $this
-     */
-    public function setCoupon($coupon)
+    public function setCoupon(?string $coupon): static
     {
         $this->coupon = $coupon;
 
         return $this;
     }
 
-    /**
-     * @return int
-     */
-    public function getCreated()
+    public function getCreated(): int
     {
         return $this->created;
     }
 
-    /**
-     * @param int $created
-     *
-     * @return $this
-     */
-    public function setCreated($created)
+    public function setCreated(int $created): static
     {
         $this->created = $created;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return $this->currency;
     }
 
-    /**
-     * @param string $currency
-     *
-     * @return $this
-     */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency): static
     {
         $this->currency = $currency;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDefaultSource()
+    public function getDefaultSource(): ?string
     {
         return $this->defaultSource;
     }
 
-    /**
-     * @param string $defaultSource
-     *
-     * @return $this
-     */
-    public function setDefaultSource($defaultSource)
+    public function setDefaultSource(?string $defaultSource): static
     {
         $this->defaultSource = $defaultSource;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDelinquent()
+    public function getDelinquent(): ?string
     {
         return $this->delinquent;
     }
 
-    /**
-     * @param string $delinquent
-     *
-     * @return $this
-     */
-    public function setDelinquent($delinquent)
+    public function setDelinquent(?string $delinquent): static
     {
         $this->delinquent = $delinquent;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * @param string $description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     *
-     * @return $this
-     */
-    public function setEmail($email)
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
 
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isLivemode()
+    public function isLivemode(): bool
     {
         return $this->livemode;
     }
 
-    /**
-     * @param bool $livemode
-     *
-     * @return $this
-     */
-    public function setLivemode($livemode)
+    public function setLivemode(bool $livemode): static
     {
         $this->livemode = $livemode;
 
@@ -254,19 +156,19 @@ abstract class AbstractCustomerModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getMetadata()
+    public function getMetadata(): ?array
     {
         return $this->metadata;
     }
 
     /**
-     * @param array $metadata
+     * @param array<string, mixed>|null $metadata
      *
      * @return $this
      */
-    public function setMetadata($metadata)
+    public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
 
@@ -274,19 +176,19 @@ abstract class AbstractCustomerModel extends StripeModel
     }
 
     /**
-     * @return array
+     * @return array<string, mixed>|null
      */
-    public function getShipping()
+    public function getShipping(): ?array
     {
         return $this->shipping;
     }
 
     /**
-     * @param array $shipping
+     * @param array<string, mixed>|null $shipping
      *
      * @return $this
      */
-    public function setShipping($shipping)
+    public function setShipping(?array $shipping): static
     {
         $this->shipping = $shipping;
 
@@ -294,9 +196,9 @@ abstract class AbstractCustomerModel extends StripeModel
     }
 
     /**
-     * @return Customer
+     * @throws ApiErrorException
      */
-    public function retrieveStripeObject()
+    public function retrieveStripeObject(): Customer
     {
         return Customer::retrieve($this->getStripeId());
     }

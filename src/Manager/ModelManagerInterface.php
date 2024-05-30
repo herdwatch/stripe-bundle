@@ -9,44 +9,27 @@ interface ModelManagerInterface
 {
     /**
      * Is stripe object supported by model manager.
-     *
-     * @return bool
      */
-    public function support(StripeObject $object);
+    public function support(StripeObject $object): bool;
 
     /**
      * Retrieve model by stripe object data.
-     *
-     * @return StripeModelInterface|null
      */
-    public function retrieve(StripeObject $object);
+    public function retrieve(StripeObject $object): ?StripeModelInterface;
 
     /**
      * Retrieve model by stripe ID and stripe object type.
-     *
-     * @param string $id
-     * @param string $objectType
-     *
-     * @return StripeModelInterface|null
      */
-    public function retrieveByStripeId($id, $objectType);
+    public function retrieveByStripeId(string $id, string $objectType): ?StripeModelInterface;
 
     /**
      * Save stripe object in database.
-     *
-     * @param bool $flush
-     *
-     * @return StripeModelInterface
      */
-    public function save(StripeObject $object, $flush = false);
+    public function save(StripeObject $object, bool $flush = false): StripeModelInterface;
 
     /**
      * Remove model from database by stripe object data
      * Return model object that was removed or NULL if model does not exists.
-     *
-     * @param bool $flush
-     *
-     * @return StripeModelInterface|null
      */
-    public function remove(StripeObject $object, $flush = false);
+    public function remove(StripeObject $object, bool $flush = false): ?StripeModelInterface;
 }
