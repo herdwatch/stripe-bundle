@@ -15,6 +15,7 @@ use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Webhook;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -25,9 +26,9 @@ final readonly class WebhookAction
     private const VERIFY_STRIPE_SIGNATURE = 'verify_stripe_signature';
 
     public function __construct(
-        private ContainerInterface $container,
-        private DefaultHandlerService $defaultHandlerService,
-        private LoggerInterface $logger
+        private ParameterBagInterface  $parameterBag,
+        private StripeHandlerInterface $handler,
+        private LoggerInterface        $logger
     ) {
     }
 
@@ -61,13 +62,7 @@ final readonly class WebhookAction
             }
 
             $event = new StripeEvent($stripeEventObject);
-            $service = $this->defaultHandlerService;
-            if ($this->container->hasParameter('miracode_stripe.process_service')) {
-                $service = $this->container->get($this->container->getParameter('miracode_stripe.process_service'));
-                assert($service instanceof StripeHandlerInterface);
-            }
-            $service->process($stripeEventObject, $event);
-
+            $this->handler->process($stripeEventObject, $event);
             $response = new Response('Webhook processed', Response::HTTP_OK);
         } catch (StripeException $stripeException) {
             $this->logger->warning($stripeException->getMessage());
@@ -82,15 +77,15 @@ final readonly class WebhookAction
      */
     private function checkSignature(Request $request, mixed $requestData): void
     {
-        if (!$this->container->hasParameter(self::MIRACODE_STRIPE_WEBHOOK_SECRET)
-            || !$this->container->hasParameter(self::VERIFY_STRIPE_SIGNATURE)
+        if (!$this->parameterBag->has(self::MIRACODE_STRIPE_WEBHOOK_SECRET)
+            || !$this->parameterBag->has(self::VERIFY_STRIPE_SIGNATURE)
         ) {
             return;
         }
         // Secure webhook with event signature: https://stripe.com/docs/webhooks/signatures
-        $webhookSecret = $this->container->getParameter(self::MIRACODE_STRIPE_WEBHOOK_SECRET);
+        $webhookSecret = $this->parameterBag->get(self::MIRACODE_STRIPE_WEBHOOK_SECRET);
 
-        $verifySignature = $this->container->getParameter(self::VERIFY_STRIPE_SIGNATURE);
+        $verifySignature = $this->parameterBag->get(self::VERIFY_STRIPE_SIGNATURE);
 
         if (true === $verifySignature && null !== $webhookSecret) {
             $sigHeader = $request->headers->get('Stripe-Signature');
