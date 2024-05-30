@@ -17,6 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 final readonly class WebhookAction
 {
@@ -37,7 +38,7 @@ final readonly class WebhookAction
      */
     public function __invoke(Request $request): Response
     {
-        $requestData = json_decode($request->getContent());
+        $requestData = json_decode($request->getContent(), false);
         if (!isset($requestData->id, $requestData->object)) {
             throw new BadRequestHttpException('Invalid webhook request data');
         }
@@ -45,27 +46,31 @@ final readonly class WebhookAction
         if (str_ends_with((string) $requestData->id, '00000000000000')) {
             return new Response('Webhook test successful', 200);
         }
-        if (StripeObjectType::EVENT !== $requestData->object) {
-            throw new StripeException('Unknown stripe object type in webhook');
-        }
-        $this->checkSignature($request, $requestData);
+        try {
+            if (StripeObjectType::EVENT !== $requestData->object) {
+                throw new StripeException('Unknown stripe object type in webhook');
+            }
+            $this->checkSignature($request, $requestData);
 
-        $stripeEventApi = new StripeEventApi();
-        if (!$stripeEventObject = $stripeEventApi->retrieve($requestData->id)) {
-            throw new StripeException(
-                sprintf('Event does not exists, id %s', $requestData->id)
-            );
-        }
+            $stripeEventApi = new StripeEventApi();
+            if (!$stripeEventObject = $stripeEventApi->retrieve($requestData->id)) {
+                throw new StripeException(
+                    sprintf('Event does not exists, id %s', $requestData->id)
+                );
+            }
 
-        $event = new StripeEvent($stripeEventObject);
-        $service = $this->defaultHandlerService;
-        if ($this->container->hasParameter('miracode_stripe.process_service')) {
-            $service = $this->container->get($this->container->getParameter('miracode_stripe.process_service'));
-            assert($service instanceof StripeHandlerInterface);
-        }
-        $service->process($stripeEventObject, $event);
+            $event = new StripeEvent($stripeEventObject);
+            $service = $this->defaultHandlerService;
+            if ($this->container->hasParameter('miracode_stripe.process_service')) {
+                $service = $this->container->get($this->container->getParameter('miracode_stripe.process_service'));
+                assert($service instanceof StripeHandlerInterface);
+            }
+            $service->process($stripeEventObject, $event);
 
-        return new Response();
+            return new Response();
+        } catch (StripeException $stripeException) {
+            throw new MethodNotAllowedHttpException([$stripeException->getMessage()]);
+        }
     }
 
     /**
