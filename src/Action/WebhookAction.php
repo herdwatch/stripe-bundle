@@ -3,18 +3,14 @@
 namespace Miracode\StripeBundle\Action;
 
 use Miracode\StripeBundle\Event\StripeEvent;
-use Miracode\StripeBundle\Handler\DefaultHandlerService;
 use Miracode\StripeBundle\Handler\StripeHandlerInterface;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
 use Miracode\StripeBundle\StripeException;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 use Stripe\Event as StripeEventApi;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Webhook;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,17 +22,14 @@ final readonly class WebhookAction
     private const VERIFY_STRIPE_SIGNATURE = 'verify_stripe_signature';
 
     public function __construct(
-        private ParameterBagInterface  $parameterBag,
+        private ParameterBagInterface $parameterBag,
         private StripeHandlerInterface $handler,
-        private LoggerInterface        $logger
+        private LoggerInterface $logger
     ) {
     }
 
     /**
      * @throws ApiErrorException
-     * @throws NotFoundExceptionInterface
-     * @throws ContainerExceptionInterface
-     * @throws StripeException
      */
     public function __invoke(Request $request): Response
     {
