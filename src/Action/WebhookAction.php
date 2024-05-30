@@ -68,11 +68,13 @@ final readonly class WebhookAction
             }
             $service->process($stripeEventObject, $event);
 
-            return new Response();
+            $response = new Response('Webhook processed', Response::HTTP_OK);
         } catch (StripeException $stripeException) {
             $this->logger->warning($stripeException->getMessage());
-            throw new BadRequestHttpException();
+            $response = new Response('Bad webhook request data', Response::HTTP_BAD_REQUEST);
         }
+
+        return $response;
     }
 
     /**
