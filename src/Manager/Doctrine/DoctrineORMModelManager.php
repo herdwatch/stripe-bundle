@@ -18,7 +18,7 @@ class DoctrineORMModelManager implements ModelManagerInterface
     public function __construct(
         private readonly ObjectManager $objectManager,
         private readonly TransformerInterface $modelTransformer,
-        private readonly array $modelClasses
+        private readonly array $modelClasses,
     ) {
     }
 

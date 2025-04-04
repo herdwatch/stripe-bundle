@@ -6,10 +6,10 @@ use Miracode\StripeBundle\Manager\Doctrine\DoctrineORMModelManager;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -18,7 +18,10 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class MiracodeStripeExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    /**
+     * @throws \Exception
+     */
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $config = $this->processConfiguration(new Configuration(), $configs);
 
@@ -26,7 +29,7 @@ class MiracodeStripeExtension extends Extension
         $loader->load('actions.php');
         $loader->load('transformer.php');
 
-        $xmlLoader = new Loader\XmlFileLoader(
+        $xmlLoader = new XmlFileLoader(
             $container,
             new FileLocator(__DIR__ . '/../Resources/config')
         );

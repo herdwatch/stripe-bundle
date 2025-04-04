@@ -9,7 +9,7 @@ use Stripe\Event;
 class DefaultHandlerService implements StripeHandlerInterface
 {
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher
+        private readonly EventDispatcherInterface $eventDispatcher,
     ) {
     }
 

@@ -19,7 +19,7 @@ class TransformerMock implements TransformerInterface
     public function transform(
         StripeObject $stripeObject,
         StripeModelInterface $model
-    )
+    ): void
     {
         // TODO: Implement transform() method.
     }

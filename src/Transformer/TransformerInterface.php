@@ -12,6 +12,6 @@ interface TransformerInterface
      */
     public function transform(
         StripeObject $stripeObject,
-        StripeModelInterface $model
-    );
+        StripeModelInterface $model,
+    ): void;
 }

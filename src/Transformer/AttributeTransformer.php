@@ -11,8 +11,8 @@ class AttributeTransformer implements TransformerInterface
 {
     public function transform(
         StripeObject $stripeObject,
-        StripeModelInterface $model
-    ) {
+        StripeModelInterface $model,
+    ): void {
         $properties = (new \ReflectionObject($model))->getProperties();
         foreach ($properties as $property) {
             $stripeObjectParam = $this->findObjectParam($property);
@@ -26,29 +26,10 @@ class AttributeTransformer implements TransformerInterface
             if (!isset($stripeObject[$name])) {
                 continue;
             }
-            $value = $stripeObject[$name];
-            if ($value instanceof StripeObject) {
-                if ($stripeObjectParam->embeddedId) {
-                    $paths = explode('.', (string) $stripeObjectParam->embeddedId);
-                    foreach ($paths as $path) {
-                        if (!isset($value[$path])) {
-                            break;
-                        }
-                        $value = $value[$path];
-                    }
-                } else {
-                    if (isset($value->object)
-                        && StripeObjectType::COLLECTION == $value->object
-                    ) {
-                        $value = array_map(fn (StripeObject $obj) => $obj->toArray(), $value->data);
-                    } else {
-                        $value = $value->toArray();
-                    }
-                }
-            }
+            $value = $this->getValue($stripeObject[$name], $stripeObjectParam);
 
             $setter = 'set' . ucfirst($property->getName());
-            call_user_func([$model, $setter], $value);
+            $model->{$setter}($value);
         }
     }
 
@@ -64,5 +45,33 @@ class AttributeTransformer implements TransformerInterface
         }
 
         return $attributes[0]->newInstance();
+    }
+
+    private function getValue(?object $stripeObject, StripeObjectParam $stripeObjectParam): mixed
+    {
+        $value = $stripeObject;
+        if (!$value instanceof StripeObject) {
+            return $value;
+        }
+
+        if ($stripeObjectParam->embeddedId) {
+            $paths = explode('.', (string) $stripeObjectParam->embeddedId);
+            foreach ($paths as $path) {
+                if (!isset($value[$path])) {
+                    break;
+                }
+                $value = $value[$path];
+            }
+        } else {
+            if (isset($value->object)
+                && StripeObjectType::COLLECTION == $value->object
+            ) {
+                $value = array_map(fn (StripeObject $obj) => $obj->toArray(), $value->data);
+            } else {
+                $value = $value->toArray();
+            }
+        }
+
+        return $value;
     }
 }
