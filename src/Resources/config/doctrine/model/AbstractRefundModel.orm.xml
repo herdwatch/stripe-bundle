@@ -5,17 +5,14 @@
 
     <mapped-superclass name="Miracode\StripeBundle\Model\AbstractRefundModel">
         <field name="amount" column="amount" type="integer" />
-        <field name="balanceTransaction" column="balance_transaction" type="string" nullable="true" />
-        <field name="charge" column="charge" type="string" />
+        <field name="balanceTransaction" column="balance_transaction" type="string" length="30" nullable="true" />
+        <field name="charge" column="charge" type="string" length="30" />
         <field name="created" column="created" type="integer" />
-        <field name="currency" column="currency" type="string" />
+        <field name="currency" column="currency" type="string" length="3"/>
         <field name="metadata" column="metadata" type="array" nullable="true" />
-        <field name="failureBalanceTransaction" column="failure_balance_transaction" type="string" nullable="true" />
-        <field name="failureReason" column="failure_reason" type="string" nullable="true" />
-        <field name="reason" column="reason" type="string" nullable="true" />
-        <field name="receiptNumber" column="receipt_number" type="string" nullable="true" />
+        <field name="reason" column="reason" type="string" length="50" nullable="true" />
         <field name="status" column="status" type="string" nullable="true" />
-        <field name="stripeId" column="stripe_id" type="string" />
+        <field name="stripeId" column="stripe_id" type="string" length="30"/>
 
         <unique-constraints>
             <unique-constraint columns="stripe_id" name="stripe_id_idx" />

@@ -11,9 +11,6 @@ abstract class AbstractCustomerModel extends StripeModel
     #[StripeObjectParam(name: 'account_balance')]
     protected ?int $accountBalance = null;
 
-    #[StripeObjectParam(name: 'discount', embeddedId: 'coupon.id')]
-    protected ?string $coupon = null;
-
     #[StripeObjectParam]
     protected int $created = 0;
 
@@ -27,25 +24,16 @@ abstract class AbstractCustomerModel extends StripeModel
     protected ?string $delinquent = null;
 
     #[StripeObjectParam]
-    protected ?string $description = null;
-
-    #[StripeObjectParam]
     protected ?string $email = null;
 
     #[StripeObjectParam]
-    protected bool $livemode = false;
+    protected bool $liveMode = false;
 
     /**
      * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
     protected ?array $metadata = null;
-
-    /**
-     * @var array<string, mixed>|null
-     */
-    #[StripeObjectParam]
-    protected ?array $shipping = null;
 
     public function getAccountBalance(): ?int
     {
@@ -55,18 +43,6 @@ abstract class AbstractCustomerModel extends StripeModel
     public function setAccountBalance(?int $accountBalance): static
     {
         $this->accountBalance = $accountBalance;
-
-        return $this;
-    }
-
-    public function getCoupon(): ?string
-    {
-        return $this->coupon;
-    }
-
-    public function setCoupon(?string $coupon): static
-    {
-        $this->coupon = $coupon;
 
         return $this;
     }
@@ -119,18 +95,6 @@ abstract class AbstractCustomerModel extends StripeModel
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -143,14 +107,14 @@ abstract class AbstractCustomerModel extends StripeModel
         return $this;
     }
 
-    public function isLivemode(): bool
+    public function isLiveMode(): bool
     {
-        return $this->livemode;
+        return $this->liveMode;
     }
 
-    public function setLivemode(bool $livemode): static
+    public function setLiveMode(bool $liveMode): static
     {
-        $this->livemode = $livemode;
+        $this->liveMode = $liveMode;
 
         return $this;
     }
@@ -171,26 +135,6 @@ abstract class AbstractCustomerModel extends StripeModel
     public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * @return array<string, mixed>|null
-     */
-    public function getShipping(): ?array
-    {
-        return $this->shipping;
-    }
-
-    /**
-     * @param array<string, mixed>|null $shipping
-     *
-     * @return $this
-     */
-    public function setShipping(?array $shipping): static
-    {
-        $this->shipping = $shipping;
 
         return $this;
     }

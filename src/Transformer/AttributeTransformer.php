@@ -66,7 +66,7 @@ class AttributeTransformer implements TransformerInterface
             if (isset($value->object)
                 && StripeObjectType::COLLECTION == $value->object
             ) {
-                $value = array_map(fn (StripeObject $obj) => $obj->toArray(), $value->data);
+                $value = array_map(fn (StripeObject $obj) => $obj->toArray(), $value->data ?? []);
             } else {
                 $value = $value->toArray();
             }

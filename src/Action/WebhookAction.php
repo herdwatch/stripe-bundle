@@ -7,9 +7,9 @@ use Miracode\StripeBundle\Handler\StripeHandlerInterface;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
 use Miracode\StripeBundle\StripeException;
 use Psr\Log\LoggerInterface;
-use Stripe\Event as StripeEventApi;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\SignatureVerificationException;
+use Stripe\StripeClient;
 use Stripe\Webhook;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +25,7 @@ final readonly class WebhookAction
         private ParameterBagInterface $parameterBag,
         private StripeHandlerInterface $handler,
         private LoggerInterface $logger,
+        private StripeClient $stripeClient,
     ) {
     }
 
@@ -48,9 +49,8 @@ final readonly class WebhookAction
             }
             $this->checkSignature($request, $requestData);
 
-            $stripeEventApi = new StripeEventApi();
             try {
-                $stripeEventObject = $stripeEventApi::retrieve($requestData->id);
+                $stripeEventObject = $this->stripeClient->events->retrieve($requestData->id);
             } catch (ApiErrorException $e) {
                 throw new StripeException(
                     sprintf('%s(%s), id %s', $e->getMessage(), $e->getCode(), $requestData->id)
@@ -79,6 +79,9 @@ final readonly class WebhookAction
         }
         // Secure webhook with event signature: https://stripe.com/docs/webhooks/signatures
         $webhookSecret = $this->parameterBag->get(self::MIRACODE_STRIPE_WEBHOOK_SECRET);
+        if (null !== $webhookSecret && !is_string($webhookSecret)) {
+            throw new StripeException('Invalid webhook secret');
+        }
 
         $verifySignature = $this->parameterBag->get(self::VERIFY_STRIPE_SIGNATURE);
 

@@ -22,7 +22,7 @@ class EntityManagerMock implements ObjectManager
      */
     public function find(string $className, mixed $id): ?object
     {
-        // TODO: Implement find() method.
+        return null;
     }
 
     /**
@@ -67,7 +67,7 @@ class EntityManagerMock implements ObjectManager
      */
     public function merge($object): object
     {
-        // TODO: Implement merge() method.
+        return $object;
     }
 
     /**
@@ -131,7 +131,7 @@ class EntityManagerMock implements ObjectManager
      */
     public function getRepository(string $className): ObjectRepository
     {
-        // TODO: Implement getRepository() method.
+        // TODO
     }
 
     /**
@@ -182,11 +182,11 @@ class EntityManagerMock implements ObjectManager
      */
     public function contains(object $object): bool
     {
-        // TODO: Implement contains() method.
+        return false;
     }
 
     public function isUninitializedObject(mixed $value): bool
     {
-        // TODO: Implement isUninitializedObject() method.
+        return true;
     }
 }

@@ -107,7 +107,7 @@ class MiracodeStripeExtensionTest extends TestCase
         );
     }
 
-    protected function getSimpleConfig()
+    protected function getSimpleConfig(): mixed
     {
         $yaml = <<<EOF
 miracode_stripe:
@@ -116,7 +116,7 @@ EOF;
         return (new Parser())->parse($yaml);
     }
 
-    protected function getSimpleConfigWithDatabase()
+    protected function getSimpleConfigWithDatabase(): mixed
     {
         $yaml = <<<EOF
 miracode_stripe:
@@ -128,7 +128,7 @@ EOF;
         return (new Parser())->parse($yaml);
     }
 
-    protected function getFullConfig()
+    protected function getFullConfig(): mixed
     {
         $yaml = <<<EOF
 miracode_stripe:
@@ -143,7 +143,7 @@ EOF;
         return (new Parser())->parse($yaml);
     }
 
-    protected function setDefinition($id, $class, ContainerBuilder $container): void
+    protected function setDefinition(string $id, string $class, ContainerBuilder $container): void
     {
         $definition = new Definition();
         $definition->setClass($class);

@@ -125,6 +125,11 @@ abstract class AbstractCouponModel extends StripeModel
         return $this->metadata;
     }
 
+    /**
+     * @param array<string, mixed>|null $metadata
+     *
+     * @return $this
+     */
     public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;

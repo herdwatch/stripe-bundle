@@ -5,17 +5,14 @@
 
     <mapped-superclass name="Miracode\StripeBundle\Model\AbstractCustomerModel">
         <field name="accountBalance" column="account_balance" type="integer" nullable="true"/>
-        <field name="coupon" column="coupon" type="string" nullable="true" />
         <field name="created" column="created" type="integer" />
-        <field name="currency"  column="currency" type="string" nullable="true" />
-        <field name="defaultSource" column="default_source" type="string" nullable="true" />
+        <field name="currency"  column="currency" type="string" length="3" nullable="true" />
+        <field name="defaultSource" column="default_source" type="string" length="50" nullable="true" />
         <field name="delinquent" column="delinquent" type="boolean" nullable="true" />
-        <field name="description" column="description" type="string" nullable="true" />
         <field name="email" column="email" type="string" />
         <field name="livemode" column="livemode" type="boolean" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
-        <field name="shipping" column="shipping" type="array" nullable="true" />
-        <field name="stripeId" column="stripe_id" type="string" />
+        <field name="stripeId" column="stripe_id" type="string" length="20"/>
 
         <unique-constraints>
             <unique-constraint columns="stripe_id" name="stripe_id_idx" />

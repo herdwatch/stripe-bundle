@@ -22,6 +22,7 @@
         "php": "^8.3",
         "symfony/framework-bundle": "^6.4 || ^7.0",
         "symfony/config": "^6.4 || ^7.0",
+        "doctrine/doctrine-bundle": "^2.0",
         "stripe/stripe-php": ">=v16.1.0"
     },
     "require-dev": {
@@ -70,6 +71,10 @@
             "./vendor-bin/rector/vendor/bin/rector process --no-diffs"
         ],
         "php-cs-fixer": "./vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --verbose --show-progress=dots",
+        "phpstan": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor-bin/phpstan/vendor/bin/phpstan --memory-limit=-1 -vvv"
+        ],
         "phpunit": "./vendor/bin/phpunit"
     }
 }

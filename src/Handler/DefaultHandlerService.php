@@ -3,8 +3,8 @@
 namespace Miracode\StripeBundle\Handler;
 
 use Miracode\StripeBundle\Event\StripeEvent;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Stripe\Event;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class DefaultHandlerService implements StripeHandlerInterface
 {

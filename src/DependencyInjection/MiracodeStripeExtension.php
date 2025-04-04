@@ -6,10 +6,10 @@ use Miracode\StripeBundle\Manager\Doctrine\DoctrineORMModelManager;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\DependencyInjection\Extension\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -66,6 +66,8 @@ class MiracodeStripeExtension extends Extension
 
     /**
      * Currently supports only orm driver.
+     *
+     * @param array<string, mixed> $config
      */
     private function configureDatabase(array $config, ContainerBuilder $container): bool
     {

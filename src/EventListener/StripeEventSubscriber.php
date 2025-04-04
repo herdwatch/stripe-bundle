@@ -113,8 +113,8 @@ class StripeEventSubscriber implements EventSubscriberInterface
             && $object->refunds instanceof StripeObject
         ) {
             $refunds = $object->refunds;
-            if ($refunds->total_count > 0) {
-                foreach ($refunds->data as $refund) {
+            if (($refunds->total_count ?? 0) > 0) {
+                foreach (($refunds->data ?? []) as $refund) {
                     if ($this->modelManager->support($refund)) {
                         $this->modelManager->save($refund, true);
                     }
