@@ -47,7 +47,7 @@ class AttributeTransformer implements TransformerInterface
         return $attributes[0]->newInstance();
     }
 
-    private function getValue(?object $stripeObject, StripeObjectParam $stripeObjectParam): mixed
+    private function getValue(mixed $stripeObject, StripeObjectParam $stripeObjectParam): mixed
     {
         $value = $stripeObject;
         if (!$value instanceof StripeObject) {
