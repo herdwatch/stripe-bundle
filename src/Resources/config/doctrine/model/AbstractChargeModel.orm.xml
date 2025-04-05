@@ -16,7 +16,7 @@
         <field name="failureCode" column="failure_code" type="string" length="30" nullable="true" />
         <field name="failureMessage" column="failure_message" type="string" length="100" nullable="true" />
         <field name="fraudDetails" column="fraud_details" type="array" nullable="true" />
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
         <field name="outcome" column="outcome" type="array" nullable="true" />
         <field name="paid" column="paid" type="boolean" />

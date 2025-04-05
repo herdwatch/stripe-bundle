@@ -20,7 +20,7 @@
         <field name="endingBalance" column="ending_balance" type="integer" nullable="true" />
         <field name="forgiven" column="forgiven" type="boolean" nullable="true" />
         <field name="lines" column="invoice_lines" type="array" nullable="true" />
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
         <field name="nextPaymentAttempt" column="next_payment_attempt" type="integer" nullable="true" />
         <field name="number" column="number" type="string" nullable="true" />

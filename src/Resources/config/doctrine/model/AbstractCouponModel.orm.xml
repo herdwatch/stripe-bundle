@@ -9,7 +9,7 @@
         <field name="currency" column="currency" type="string" nullable="true" />
         <field name="duration" column="duration" type="string" />
         <field name="durationInMonths" column="duration_in_months" type="integer" nullable="true" />
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
         <field name="maxRedemptions" column="max_redemptions" type="integer" nullable="true" />
         <field name="percentOff" column="percent_off" type="integer" nullable="true" />

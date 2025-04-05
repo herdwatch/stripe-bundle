@@ -10,7 +10,7 @@
         <field name="defaultSource" column="default_source" type="string" length="50" nullable="true" />
         <field name="delinquent" column="delinquent" type="boolean" nullable="true" />
         <field name="email" column="email" type="string" />
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
         <field name="stripeId" column="stripe_id" type="string" length="20"/>
 

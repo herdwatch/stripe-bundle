@@ -16,7 +16,7 @@
         <field name="daysUntilDue" column="days_until_due" type="integer" nullable="true" />
         <field name="endedAt" column="ended_at" type="integer" nullable="true" />
         <field name="items" column="items" type="array" nullable="true" />
-        <field name="livemode" column="livemode" type="boolean" nullable="true" />
+        <field name="liveMode" column="livemode" type="boolean" nullable="true" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
         <field name="plan" column="plan" type="string" />
         <field name="quantity" column="quantity" type="integer" />
