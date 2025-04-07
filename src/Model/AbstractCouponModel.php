@@ -13,6 +13,9 @@ abstract class AbstractCouponModel extends StripeModel
     protected int $created = 0;
 
     #[StripeObjectParam]
+    protected ?string $name = null;
+
+    #[StripeObjectParam]
     protected ?string $currency = null;
 
     #[StripeObjectParam]
@@ -65,6 +68,18 @@ abstract class AbstractCouponModel extends StripeModel
     public function setCreated(int $created): static
     {
         $this->created = $created;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): AbstractCouponModel
+    {
+        $this->name = $name;
 
         return $this;
     }
