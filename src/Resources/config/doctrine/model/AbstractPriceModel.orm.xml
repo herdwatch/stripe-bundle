@@ -17,7 +17,7 @@
         <field name="created" column="created" type="integer" />
         <field name="currencyOptions" column="currency_options" type="array" nullable="true" />
         <field name="customUnitAmount" column="custom_unit_amount" type="array" nullable="true" />
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="lookupKey" column="lookup_key" type="string" nullable="true" />
         <field name="taxBehaviour" column="tax_behaviour" type="string" nullable="true" />
         <field name="tiers" column="tiers" type="array" nullable="true" />
