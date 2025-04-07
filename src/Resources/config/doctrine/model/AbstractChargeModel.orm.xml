@@ -21,7 +21,7 @@
         <field name="outcome" column="outcome" type="array" nullable="true" />
         <field name="paid" column="paid" type="boolean" />
         <field name="refunded" column="refunded" type="boolean" />
-        <field name="status" column="status" type="string" nullable="true"/>
+        <field name="status" column="status" type="string" length="30" nullable="true"/>
         <field name="stripeId" column="stripe_id" type="string" length="30"/>
 
         <unique-constraints>

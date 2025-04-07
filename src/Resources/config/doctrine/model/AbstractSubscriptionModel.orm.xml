@@ -21,7 +21,7 @@
         <field name="plan" column="plan" type="string" length="30" nullable="true"/>
         <field name="quantity" column="quantity" type="integer" nullable="true"/>
         <field name="start" column="start" type="integer" nullable="true" />
-        <field name="status" column="status" type="string" />
+        <field name="status" column="status" type="string" length="30" nullable="true"/>
         <field name="stripeId" column="stripe_id" type="string" length="30"/>
         <field name="taxPercent" column="tax_percent" percision="6" scale="2" type="decimal" nullable="true" />
         <field name="trialEnd" column="trial_end" type="integer" nullable="true" />
