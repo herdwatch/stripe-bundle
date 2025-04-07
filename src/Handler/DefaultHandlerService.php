@@ -3,7 +3,6 @@
 namespace Miracode\StripeBundle\Handler;
 
 use Miracode\StripeBundle\Event\StripeEvent;
-use Miracode\StripeBundle\Handler\StripeHandlerInterface;
 use Stripe\Event;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
