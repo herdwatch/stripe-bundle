@@ -7,7 +7,7 @@
         <field name="country" column="country" type="string" length="4"/>
         <field name="created" column="created" type="integer" />
         <field name="customer" column="customer" type="string" length="20" nullable="true"/>
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="type" column="type" type="string" length="6" nullable="true"/>
         <field name="value" column="value" type="string" nullable="true"/>
         <field name="verification" column="verification" type="array" nullable="true"/>
