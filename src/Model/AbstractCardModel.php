@@ -63,12 +63,6 @@ abstract class AbstractCardModel extends StripeModel
     #[StripeObjectParam]
     protected ?string $name = null;
 
-    /**
-     * @var array<string, mixed>
-     */
-    #[StripeObjectParam]
-    protected ?array $metadata = null;
-
     #[StripeObjectParam(name: 'tokenization_method')]
     protected ?string $tokenizationMethod = null;
 
@@ -296,24 +290,6 @@ abstract class AbstractCardModel extends StripeModel
     public function setName(?string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return array<string, mixed>|null
-     */
-    public function getMetadata(): ?array
-    {
-        return $this->metadata;
-    }
-
-    /**
-     * @param array<string, mixed>|null $metadata
-     */
-    public function setMetadata(?array $metadata): static
-    {
-        $this->metadata = $metadata;
 
         return $this;
     }

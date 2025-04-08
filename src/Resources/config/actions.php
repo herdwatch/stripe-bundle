@@ -7,6 +7,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use Miracode\StripeBundle\Action\WebhookAction;
 use Miracode\StripeBundle\Handler\StripeHandlerInterface;
 use Psr\Log\LoggerInterface;
+use Stripe\StripeClient;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -18,5 +19,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             new ReferenceConfigurator(ParameterBagInterface::class),
             new ReferenceConfigurator(StripeHandlerInterface::class),
             new ReferenceConfigurator(LoggerInterface::class),
+            new ReferenceConfigurator(StripeClient::class),
         ]);
 };

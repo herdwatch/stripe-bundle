@@ -5,7 +5,7 @@ The MiracodeStripeBundle integrates Stripe PHP SDK to your Symfony project.
 Also you can configure bundle to save Stripe data in database. 
 You are free to choose what Stripe objects will be stored. 
 
-This bundle  tested on Symfony versions 2.7, 2.8, 3.1, 3.3, 3.4, 4.0. Compatible with Symfony >=2.4 
+This bundle  tested on Symfony versions 6.4, 7.2. Compatible with Symfony >=6.4 
 
 [![Build Status](https://travis-ci.org/mirovskyi/stripe-bundle.svg?branch=1.0)](https://travis-ci.org/mirovskyi/stripe-bundle)
 
@@ -21,18 +21,6 @@ composer require miracode/stripe-bundle
 
 Register bundle
 
-``` php
-// app/AppKernel.php
-public function registerBundles()
-{
-  $bundles = array(
-    // [...]
-    new Miracode\StripeBundle\MiracodeStripeBundle(),
-  );
-}
-```
-
-For Symfony >=3.4
 
 ``` php
 // config/bundles.php
@@ -46,6 +34,7 @@ And set-up required configuration
 ``` yaml
 # app/config/config.yml (or config/packages/miracode_stripe.yaml for Symfony >=3.4)
 miracode_stripe:
+    api_version: "2019-10-17"
     secret_key: "%stripe_secret_key%"
 ```
 

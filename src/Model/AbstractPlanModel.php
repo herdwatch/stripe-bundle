@@ -22,7 +22,7 @@ abstract class AbstractPlanModel extends StripeModel
     protected ?int $intervalCount = null;
 
     #[StripeObjectParam]
-    protected bool $livemode = false;
+    protected bool $liveMode = false;
 
     /**
      * @var array<string, mixed>|null
@@ -33,11 +33,17 @@ abstract class AbstractPlanModel extends StripeModel
     #[StripeObjectParam]
     protected ?string $name = null;
 
+    #[StripeObjectParam(name: 'nickname')]
+    protected ?string $nickName = null;
+
     #[StripeObjectParam(name: 'statement_descriptor')]
     protected ?string $statementDescriptor = null;
 
     #[StripeObjectParam(name: 'trial_period_days')]
     protected ?int $trialPeriodDays = null;
+
+    #[StripeObjectParam]
+    protected bool $active = false;
 
     public function getAmount(): ?int
     {
@@ -99,14 +105,14 @@ abstract class AbstractPlanModel extends StripeModel
         return $this;
     }
 
-    public function isLivemode(): bool
+    public function isLiveMode(): bool
     {
-        return $this->livemode;
+        return $this->liveMode;
     }
 
-    public function setLivemode(bool $livemode): static
+    public function setLiveMode(bool $liveMode): static
     {
-        $this->livemode = $livemode;
+        $this->liveMode = $liveMode;
 
         return $this;
     }
@@ -141,6 +147,18 @@ abstract class AbstractPlanModel extends StripeModel
         return $this;
     }
 
+    public function getNickName(): ?string
+    {
+        return $this->nickName;
+    }
+
+    public function setNickName(?string $nickName): AbstractPlanModel
+    {
+        $this->nickName = $nickName;
+
+        return $this;
+    }
+
     public function getStatementDescriptor(): ?string
     {
         return $this->statementDescriptor;
@@ -161,6 +179,18 @@ abstract class AbstractPlanModel extends StripeModel
     public function setTrialPeriodDays(?int $trialPeriodDays): static
     {
         $this->trialPeriodDays = $trialPeriodDays;
+
+        return $this;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): static
+    {
+        $this->active = $active;
 
         return $this;
     }

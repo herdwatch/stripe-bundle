@@ -6,15 +6,16 @@
     <mapped-superclass name="Miracode\StripeBundle\Model\AbstractCouponModel">
         <field name="amountOff"  column="amount_off" type="integer" nullable="true" />
         <field name="created" column="created" type="integer" />
-        <field name="currency" column="currency" type="string" nullable="true" />
+        <field name="name" column="name" type="string" length="50" nullable="true" />
+        <field name="currency" column="currency" type="string" length="3" nullable="true" />
         <field name="duration" column="duration" type="string" />
         <field name="durationInMonths" column="duration_in_months" type="integer" nullable="true" />
-        <field name="livemode" column="livemode" type="boolean" />
+        <field name="liveMode" column="livemode" type="boolean" />
         <field name="metadata" column="metadata" type="array" nullable="true" />
         <field name="maxRedemptions" column="max_redemptions" type="integer" nullable="true" />
         <field name="percentOff" column="percent_off" type="integer" nullable="true" />
         <field name="redeemBy" column="redeem_by" type="integer" nullable="true" />
-        <field name="stripeId" column="stripe_id" type="string" />
+        <field name="stripeId" column="stripe_id" type="string" length="30" nullable="true"/>
         <field name="timesRedeemed" column="times_redeemed" type="integer" nullable="true" />
         <field name="valid" column="valid" type="boolean" nullable="true" />
 

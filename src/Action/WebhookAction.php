@@ -7,9 +7,9 @@ use Miracode\StripeBundle\Handler\StripeHandlerInterface;
 use Miracode\StripeBundle\Stripe\StripeObjectType;
 use Miracode\StripeBundle\StripeException;
 use Psr\Log\LoggerInterface;
-use Stripe\Event as StripeEventApi;
 use Stripe\Exception\ApiErrorException;
 use Stripe\Exception\SignatureVerificationException;
+use Stripe\StripeClient;
 use Stripe\Webhook;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,23 +18,25 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 final readonly class WebhookAction
 {
-    private const MIRACODE_STRIPE_WEBHOOK_SECRET = 'miracode_stripe.webhook_secret';
-    private const VERIFY_STRIPE_SIGNATURE = 'verify_stripe_signature';
+    private const string MIRACODE_STRIPE_WEBHOOK_SECRET = 'miracode_stripe.webhook_secret';
+    private const string VERIFY_STRIPE_SIGNATURE = 'verify_stripe_signature';
 
     public function __construct(
         private ParameterBagInterface $parameterBag,
         private StripeHandlerInterface $handler,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
+        private StripeClient $stripeClient,
     ) {
     }
 
-    /**
-     * @throws ApiErrorException
-     */
     public function __invoke(Request $request): Response
     {
-        $requestData = json_decode($request->getContent(), false);
-        if (!isset($requestData->id, $requestData->object)) {
+        try {
+            $requestData = json_decode($request->getContent(), false, 512, JSON_THROW_ON_ERROR);
+            if (!isset($requestData->id, $requestData->object)) {
+                throw new BadRequestHttpException('Invalid webhook request data');
+            }
+        } catch (\JsonException) {
             throw new BadRequestHttpException('Invalid webhook request data');
         }
         // If event id ends with 14 zero's then it is a test webhook event. Return 200 status.
@@ -47,13 +49,13 @@ final readonly class WebhookAction
             }
             $this->checkSignature($request, $requestData);
 
-            $stripeEventApi = new StripeEventApi();
-            if (!$stripeEventObject = $stripeEventApi->retrieve($requestData->id)) {
+            try {
+                $stripeEventObject = $this->stripeClient->events->retrieve($requestData->id);
+            } catch (ApiErrorException $e) {
                 throw new StripeException(
-                    sprintf('Event does not exists, id %s', $requestData->id)
+                    sprintf('%s(%s), id %s', $e->getMessage(), $e->getCode(), $requestData->id)
                 );
             }
-
             $event = new StripeEvent($stripeEventObject);
             $this->handler->process($stripeEventObject, $event);
             $response = new Response('Webhook processed', Response::HTTP_OK);
@@ -77,6 +79,9 @@ final readonly class WebhookAction
         }
         // Secure webhook with event signature: https://stripe.com/docs/webhooks/signatures
         $webhookSecret = $this->parameterBag->get(self::MIRACODE_STRIPE_WEBHOOK_SECRET);
+        if (null !== $webhookSecret && !is_string($webhookSecret)) {
+            throw new StripeException('Invalid webhook secret');
+        }
 
         $verifySignature = $this->parameterBag->get(self::VERIFY_STRIPE_SIGNATURE);
 

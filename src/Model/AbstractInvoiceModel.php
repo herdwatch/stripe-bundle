@@ -58,7 +58,7 @@ abstract class AbstractInvoiceModel extends StripeModel
     protected ?array $lines = null;
 
     #[StripeObjectParam]
-    protected bool $livemode = false;
+    protected bool $liveMode = false;
 
     /**
      * @var array<string, mixed>|null
@@ -309,14 +309,14 @@ abstract class AbstractInvoiceModel extends StripeModel
         return $this;
     }
 
-    public function isLivemode(): bool
+    public function isLiveMode(): bool
     {
-        return $this->livemode;
+        return $this->liveMode;
     }
 
-    public function setLivemode(bool $livemode): static
+    public function setLiveMode(bool $liveMode): static
     {
-        $this->livemode = $livemode;
+        $this->liveMode = $liveMode;
 
         return $this;
     }

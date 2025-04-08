@@ -14,11 +14,13 @@ class DoctrineORMModelManager implements ModelManagerInterface
 {
     /**
      * DoctrineORMModelManager constructor.
+     *
+     * @param class-string[] $modelClasses
      */
     public function __construct(
         private readonly ObjectManager $objectManager,
         private readonly TransformerInterface $modelTransformer,
-        private readonly array $modelClasses
+        private readonly array $modelClasses,
     ) {
     }
 
@@ -42,9 +44,14 @@ class DoctrineORMModelManager implements ModelManagerInterface
         $this->checkSupport($object);
         $modelClass = $this->modelClass($object);
 
-        return $this->objectManager->getRepository($modelClass)->findOneBy([
+        $object = $this->objectManager->getRepository($modelClass)->findOneBy([
             'stripeId' => $object->id,
         ]);
+        if ($object instanceof StripeModelInterface) {
+            return $object;
+        }
+
+        return null;
     }
 
     /**
@@ -144,6 +151,10 @@ class DoctrineORMModelManager implements ModelManagerInterface
 
     /**
      * Get model class name for specified stripe object.
+     *
+     * @return class-string
+     *
+     * @throws StripeException
      */
     protected function modelClass(StripeObject $object): string
     {
@@ -152,11 +163,19 @@ class DoctrineORMModelManager implements ModelManagerInterface
 
     /**
      * Create new model object.
+     *
+     * @throws StripeException
      */
     protected function createModel(StripeObject $object): StripeModelInterface
     {
         $className = $this->modelClass($object);
 
-        return new $className();
+        $object = new $className();
+
+        if (!$object instanceof StripeModelInterface) {
+            throw new StripeException("{$className} is not StripeModelInterface!");
+        }
+
+        return $object;
     }
 }

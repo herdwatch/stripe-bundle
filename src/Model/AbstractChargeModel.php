@@ -45,19 +45,13 @@ abstract class AbstractChargeModel extends StripeModel
     protected ?array $fraudDetails = null;
 
     #[StripeObjectParam]
-    protected ?string $invoice = null;
-
-    #[StripeObjectParam]
-    protected bool $livemode = false;
+    protected bool $liveMode = false;
 
     /**
      * @var array<string, mixed>|null
      */
     #[StripeObjectParam]
     protected ?array $metadata = null;
-
-    #[StripeObjectParam]
-    protected ?string $order = null;
 
     /**
      * @var array<string, mixed>|null
@@ -68,26 +62,8 @@ abstract class AbstractChargeModel extends StripeModel
     #[StripeObjectParam]
     protected bool $paid = false;
 
-    #[StripeObjectParam(name: 'receipt_email')]
-    protected ?string $receiptEmail = null;
-
-    #[StripeObjectParam(name: 'receipt_number')]
-    protected ?string $receiptNumber = null;
-
     #[StripeObjectParam]
     protected bool $refunded = false;
-
-    /**
-     * @var array<string, mixed>|null
-     */
-    #[StripeObjectParam]
-    protected ?array $shipping = null;
-
-    #[StripeObjectParam(embeddedId: 'id')]
-    protected ?string $source = null;
-
-    #[StripeObjectParam(name: 'statement_descriptor')]
-    protected ?string $statementDescriptor = null;
 
     #[StripeObjectParam]
     protected ?string $status = null;
@@ -242,26 +218,14 @@ abstract class AbstractChargeModel extends StripeModel
         return $this;
     }
 
-    public function getInvoice(): ?string
+    public function isLiveMode(): bool
     {
-        return $this->invoice;
+        return $this->liveMode;
     }
 
-    public function setInvoice(?string $invoice): static
+    public function setLiveMode(bool $liveMode): static
     {
-        $this->invoice = $invoice;
-
-        return $this;
-    }
-
-    public function isLivemode(): bool
-    {
-        return $this->livemode;
-    }
-
-    public function setLivemode(bool $livemode): static
-    {
-        $this->livemode = $livemode;
+        $this->liveMode = $liveMode;
 
         return $this;
     }
@@ -280,18 +244,6 @@ abstract class AbstractChargeModel extends StripeModel
     public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;
-
-        return $this;
-    }
-
-    public function getOrder(): ?string
-    {
-        return $this->order;
-    }
-
-    public function setOrder(?string $order): static
-    {
-        $this->order = $order;
 
         return $this;
     }
@@ -326,30 +278,6 @@ abstract class AbstractChargeModel extends StripeModel
         return $this;
     }
 
-    public function getReceiptEmail(): ?string
-    {
-        return $this->receiptEmail;
-    }
-
-    public function setReceiptEmail(?string $receiptEmail): static
-    {
-        $this->receiptEmail = $receiptEmail;
-
-        return $this;
-    }
-
-    public function getReceiptNumber(): ?string
-    {
-        return $this->receiptNumber;
-    }
-
-    public function setReceiptNumber(?string $receiptNumber): static
-    {
-        $this->receiptNumber = $receiptNumber;
-
-        return $this;
-    }
-
     public function isRefunded(): bool
     {
         return $this->refunded;
@@ -358,48 +286,6 @@ abstract class AbstractChargeModel extends StripeModel
     public function setRefunded(bool $refunded): static
     {
         $this->refunded = $refunded;
-
-        return $this;
-    }
-
-    /**
-     * @return array<string, mixed>|null
-     */
-    public function getShipping(): ?array
-    {
-        return $this->shipping;
-    }
-
-    /**
-     * @param array<string, mixed>|null $shipping
-     */
-    public function setShipping(?array $shipping): static
-    {
-        $this->shipping = $shipping;
-
-        return $this;
-    }
-
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
-    public function setSource(?string $source): static
-    {
-        $this->source = $source;
-
-        return $this;
-    }
-
-    public function getStatementDescriptor(): ?string
-    {
-        return $this->statementDescriptor;
-    }
-
-    public function setStatementDescriptor(?string $statementDescriptor): static
-    {
-        $this->statementDescriptor = $statementDescriptor;
 
         return $this;
     }

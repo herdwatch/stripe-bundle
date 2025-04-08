@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Miracode\StripeBundle\Model\AbstractProductModel">
+        <field name="active" column="active" type="boolean" />
+        <field name="defaultPrice" column="default_price" type="string" nullable="true" />
+        <field name="description" column="description" type="string" nullable="true" />
+        <field name="metadata" column="metadata" type="array" nullable="true" />
+        <field name="name" column="name" type="string" />
+        <field name="object" column="object" type="string" nullable="true"/>
+        <field name="created" column="created" type="integer" />
+        <field name="features" column="features" type="array" nullable="true"/>
+        <field name="images" column="images" type="array" nullable="true"/>
+        <field name="liveMode" column="livemode" type="boolean" />
+        <field name="packageDimensions" column="package_dimensions" type="array" nullable="true" />
+        <field name="shippable" column="shippable" type="boolean" nullable="true" />
+        <field name="statementDescriptor" column="statement_descriptor" type="string" nullable="true" />
+        <field name="taxCode" column="tax_code" type="string" nullable="true" />
+        <field name="unitLabel" column="unit_label" type="string" nullable="true" />
+        <field name="updated" column="updated" type="integer" nullable="true" />
+        <field name="url" column="url" type="string"  nullable="true" />
+        <field name="stripeId" column="stripe_id" type="string" length="30"/>
+        <unique-constraints>
+            <unique-constraint columns="stripe_id" name="stripe_id_idx" />
+        </unique-constraints>
+    </mapped-superclass>
+
+</doctrine-mapping>

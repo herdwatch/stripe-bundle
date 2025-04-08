@@ -2,7 +2,10 @@
 
 namespace Miracode\StripeBundle\Tests\Mock;
 
+use Doctrine\Persistence\Mapping\ClassMetadata;
+use Doctrine\Persistence\Mapping\ClassMetadataFactory;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectRepository;
 
 class EntityManagerMock implements ObjectManager
 {
@@ -15,11 +18,11 @@ class EntityManagerMock implements ObjectManager
      * @param string $className The class name of the object to find.
      * @param mixed $id The identity of the object to find.
      *
-     * @return object The found object.
+     * @return object|null The found object.
      */
-    public function find($className, $id)
+    public function find(string $className, mixed $id): ?object
     {
-        // TODO: Implement find() method.
+        return null;
     }
 
     /**
@@ -34,7 +37,7 @@ class EntityManagerMock implements ObjectManager
      *
      * @return void
      */
-    public function persist($object)
+    public function persist(object $object): void
     {
         // TODO: Implement persist() method.
     }
@@ -48,7 +51,7 @@ class EntityManagerMock implements ObjectManager
      *
      * @return void
      */
-    public function remove($object)
+    public function remove(object $object): void
     {
         // TODO: Implement remove() method.
     }
@@ -62,20 +65,18 @@ class EntityManagerMock implements ObjectManager
      *
      * @return object
      */
-    public function merge($object)
+    public function merge($object): object
     {
-        // TODO: Implement merge() method.
+        return $object;
     }
 
     /**
      * Clears the ObjectManager. All objects that are currently managed
      * by this ObjectManager become detached.
      *
-     * @param string|null $objectName if given, only objects of this type will get detached.
-     *
      * @return void
      */
-    public function clear($objectName = NULL)
+    public function clear(): void
     {
         // TODO: Implement clear() method.
     }
@@ -91,7 +92,7 @@ class EntityManagerMock implements ObjectManager
      *
      * @return void
      */
-    public function detach($object)
+    public function detach(object $object): void
     {
         // TODO: Implement detach() method.
     }
@@ -104,7 +105,7 @@ class EntityManagerMock implements ObjectManager
      *
      * @return void
      */
-    public function refresh($object)
+    public function refresh(object $object): void
     {
         // TODO: Implement refresh() method.
     }
@@ -116,7 +117,7 @@ class EntityManagerMock implements ObjectManager
      *
      * @return void
      */
-    public function flush()
+    public function flush(): void
     {
         // TODO: Implement flush() method.
     }
@@ -126,11 +127,11 @@ class EntityManagerMock implements ObjectManager
      *
      * @param string $className
      *
-     * @return \Doctrine\Persistence\ObjectRepository
+     * @return ObjectRepository
      */
-    public function getRepository($className)
+    public function getRepository(string $className): ObjectRepository
     {
-        // TODO: Implement getRepository() method.
+        // TODO
     }
 
     /**
@@ -141,9 +142,9 @@ class EntityManagerMock implements ObjectManager
      *
      * @param string $className
      *
-     * @return \Doctrine\Persistence\Mapping\ClassMetadata
+     * @return ClassMetadata
      */
-    public function getClassMetadata($className)
+    public function getClassMetadata(string $className): ClassMetadata
     {
         // TODO: Implement getClassMetadata() method.
     }
@@ -151,9 +152,9 @@ class EntityManagerMock implements ObjectManager
     /**
      * Gets the metadata factory used to gather the metadata of classes.
      *
-     * @return \Doctrine\Persistence\Mapping\ClassMetadataFactory
+     * @return ClassMetadataFactory
      */
-    public function getMetadataFactory()
+    public function getMetadataFactory(): ClassMetadataFactory
     {
         // TODO: Implement getMetadataFactory() method.
     }
@@ -167,7 +168,7 @@ class EntityManagerMock implements ObjectManager
      *
      * @return void
      */
-    public function initializeObject($obj)
+    public function initializeObject(object $obj): void
     {
         // TODO: Implement initializeObject() method.
     }
@@ -179,8 +180,13 @@ class EntityManagerMock implements ObjectManager
      *
      * @return bool
      */
-    public function contains($object)
+    public function contains(object $object): bool
     {
-        // TODO: Implement contains() method.
+        return false;
+    }
+
+    public function isUninitializedObject(mixed $value): bool
+    {
+        return true;
     }
 }

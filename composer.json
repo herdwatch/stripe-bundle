@@ -19,15 +19,17 @@
         }
     ],
     "require": {
-        "php": "^8.2",
-        "symfony/framework-bundle": "^5.4 || ^6.4",
-        "symfony/config": "^5.4 || ^6.4",
-        "stripe/stripe-php": ">=9.0"
+        "php": "^8.3",
+        "symfony/framework-bundle": "^6.4 || ^7.0",
+        "symfony/config": "^6.4 || ^7.0",
+        "doctrine/doctrine-bundle": "^2.0",
+        "stripe/stripe-php": ">=v16.1.0"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest",
         "doctrine/orm": ">=2.2",
         "phpunit/phpunit": "^10.5",
-        "symfony/yaml": "^5.4 || ^6.4",
+        "symfony/yaml": "^6.4 || ^7.0",
         "bamarni/composer-bin-plugin": "^1.8"
     },
     "suggest": {
@@ -40,11 +42,11 @@
             "forward-command": true
         },
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "3.x-dev"
         },
         "symfony": {
             "allow-contrib": false,
-            "require": "5.4.* || 6.4.*"
+            "require": "6.4.* || 7.*"
         }
     },
     "autoload": {
@@ -69,6 +71,10 @@
             "./vendor-bin/rector/vendor/bin/rector process --no-diffs"
         ],
         "php-cs-fixer": "./vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --verbose --show-progress=dots",
+        "phpstan": [
+            "Composer\\Config::disableProcessTimeout",
+            "./vendor-bin/phpstan/vendor/bin/phpstan --memory-limit=-1 -vvv"
+        ],
         "phpunit": "./vendor/bin/phpunit"
     }
 }

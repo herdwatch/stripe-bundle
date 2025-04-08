@@ -1,0 +1,43 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property Stripe\\StripeObject\:\:\$object\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Manager/Doctrine/DoctrineORMModelManager.php
+
+		-
+			message: '#^Trait Miracode\\StripeBundle\\Model\\Traits\\SafeDeleteTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: src/Model/Traits/SafeDeleteTrait.php
+
+		-
+			message: '#^Access to an undefined property Stripe\\StripeObject\:\:\$data\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Event/StripeEventTest.php
+
+		-
+			message: '#^Access to an undefined property Stripe\\StripeObject\:\:\$object\.$#'
+			identifier: property.notFound
+			count: 1
+			path: tests/Event/StripeEventTest.php
+
+		-
+			message: '#^Method Miracode\\StripeBundle\\Tests\\Mock\\EntityManagerMock\:\:getClassMetadata\(\) return type with generic interface Doctrine\\Persistence\\Mapping\\ClassMetadata does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: tests/Mock/EntityManagerMock.php
+
+		-
+			message: '#^Method Miracode\\StripeBundle\\Tests\\Mock\\EntityManagerMock\:\:getMetadataFactory\(\) return type with generic interface Doctrine\\Persistence\\Mapping\\ClassMetadataFactory does not specify its types\: T$#'
+			identifier: missingType.generics
+			count: 1
+			path: tests/Mock/EntityManagerMock.php
+
+		-
+			message: '#^Method Miracode\\StripeBundle\\Tests\\Mock\\EntityManagerMock\:\:getRepository\(\) return type with generic interface Doctrine\\Persistence\\ObjectRepository does not specify its types\: TEntityClass$#'
+			identifier: missingType.generics
+			count: 1
+			path: tests/Mock/EntityManagerMock.php

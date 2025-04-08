@@ -13,6 +13,9 @@ abstract class AbstractCouponModel extends StripeModel
     protected int $created = 0;
 
     #[StripeObjectParam]
+    protected ?string $name = null;
+
+    #[StripeObjectParam]
     protected ?string $currency = null;
 
     #[StripeObjectParam]
@@ -22,7 +25,7 @@ abstract class AbstractCouponModel extends StripeModel
     protected ?int $durationInMonths = null;
 
     #[StripeObjectParam]
-    protected bool $livemode = false;
+    protected bool $liveMode = false;
 
     /**
      * @var array<string, mixed>|null
@@ -69,6 +72,18 @@ abstract class AbstractCouponModel extends StripeModel
         return $this;
     }
 
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): AbstractCouponModel
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function getCurrency(): ?string
     {
         return $this->currency;
@@ -105,14 +120,14 @@ abstract class AbstractCouponModel extends StripeModel
         return $this;
     }
 
-    public function isLivemode(): bool
+    public function isLiveMode(): bool
     {
-        return $this->livemode;
+        return $this->liveMode;
     }
 
-    public function setLivemode(bool $livemode): static
+    public function setLiveMode(bool $liveMode): static
     {
-        $this->livemode = $livemode;
+        $this->liveMode = $liveMode;
 
         return $this;
     }
@@ -125,6 +140,11 @@ abstract class AbstractCouponModel extends StripeModel
         return $this->metadata;
     }
 
+    /**
+     * @param array<string, mixed>|null $metadata
+     *
+     * @return $this
+     */
     public function setMetadata(?array $metadata): static
     {
         $this->metadata = $metadata;

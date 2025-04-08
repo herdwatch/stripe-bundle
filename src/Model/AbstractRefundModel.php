@@ -27,17 +27,8 @@ abstract class AbstractRefundModel extends StripeModel
     #[StripeObjectParam]
     protected ?array $metadata = null;
 
-    #[StripeObjectParam(name: 'failure_balance_transaction')]
-    protected ?string $failureBalanceTransaction = null;
-
-    #[StripeObjectParam(name: 'failure_reason')]
-    protected ?string $failureReason = null;
-
     #[StripeObjectParam]
     protected ?string $reason = null;
-
-    #[StripeObjectParam(name: 'receipt_number')]
-    protected ?string $receiptNumber = null;
 
     #[StripeObjectParam]
     protected ?string $status = null;
@@ -120,30 +111,6 @@ abstract class AbstractRefundModel extends StripeModel
         return $this;
     }
 
-    public function getFailureBalanceTransaction(): ?string
-    {
-        return $this->failureBalanceTransaction;
-    }
-
-    public function setFailureBalanceTransaction(?string $failureBalanceTransaction): static
-    {
-        $this->failureBalanceTransaction = $failureBalanceTransaction;
-
-        return $this;
-    }
-
-    public function getFailureReason(): ?string
-    {
-        return $this->failureReason;
-    }
-
-    public function setFailureReason(?string $failureReason): static
-    {
-        $this->failureReason = $failureReason;
-
-        return $this;
-    }
-
     public function getReason(): ?string
     {
         return $this->reason;
@@ -152,18 +119,6 @@ abstract class AbstractRefundModel extends StripeModel
     public function setReason(?string $reason): static
     {
         $this->reason = $reason;
-
-        return $this;
-    }
-
-    public function getReceiptNumber(): ?string
-    {
-        return $this->receiptNumber;
-    }
-
-    public function setReceiptNumber(?string $receiptNumber): static
-    {
-        $this->receiptNumber = $receiptNumber;
 
         return $this;
     }
