@@ -15,7 +15,7 @@
         <field name="status" column="status" type="string" length="30" nullable="true"/>
         <field name="stripeId" column="stripe_id" type="string" length="30"/>
         <unique-constraints>
-            <unique-constraint columns="stripe_id" name="stripe_id_idx" />
+            <unique-constraint columns="stripe_id" />
         </unique-constraints>
     </mapped-superclass>
 
