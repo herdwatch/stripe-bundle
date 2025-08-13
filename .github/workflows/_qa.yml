@@ -7,7 +7,7 @@ jobs:
 
   run-tests:
     name: Test PHP ${{ matrix.php }} and Symfony ${{ matrix.symfony }}
-    runs-on: [self-hosted]
+    runs-on: [ ubuntu-latest ]
     strategy:
       fail-fast: false
       matrix:
@@ -20,8 +20,6 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           tools: flex
-        env:
-          runner: self-hosted
       - name: Download dependencies
         uses: ramsey/composer-install@v2
         env:
