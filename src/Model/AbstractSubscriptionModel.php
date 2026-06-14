@@ -7,7 +7,7 @@ use Miracode\StripeBundle\Annotation\StripeObjectParam;
 abstract class AbstractSubscriptionModel extends StripeModel
 {
     #[StripeObjectParam(name: 'application_fee_percent')]
-    protected ?float $applicationFeePercent = null;
+    protected ?string $applicationFeePercent = null;
 
     #[StripeObjectParam]
     protected ?string $billing = null;
@@ -67,7 +67,7 @@ abstract class AbstractSubscriptionModel extends StripeModel
     protected ?string $status = null;
 
     #[StripeObjectParam(name: 'tax_percent')]
-    protected ?float $taxPercent = null;
+    protected ?string $taxPercent = null;
 
     #[StripeObjectParam(name: 'trial_end')]
     protected ?int $trialEnd = null;
@@ -75,12 +75,12 @@ abstract class AbstractSubscriptionModel extends StripeModel
     #[StripeObjectParam(name: 'trial_start')]
     protected ?int $trialStart = null;
 
-    public function getApplicationFeePercent(): ?float
+    public function getApplicationFeePercent(): ?string
     {
         return $this->applicationFeePercent;
     }
 
-    public function setApplicationFeePercent(?float $applicationFeePercent): static
+    public function setApplicationFeePercent(?string $applicationFeePercent): static
     {
         $this->applicationFeePercent = $applicationFeePercent;
 
@@ -303,12 +303,12 @@ abstract class AbstractSubscriptionModel extends StripeModel
         return $this;
     }
 
-    public function getTaxPercent(): ?float
+    public function getTaxPercent(): ?string
     {
         return $this->taxPercent;
     }
 
-    public function setTaxPercent(?float $taxPercent): static
+    public function setTaxPercent(?string $taxPercent): static
     {
         $this->taxPercent = $taxPercent;
 

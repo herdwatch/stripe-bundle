@@ -21,7 +21,7 @@ abstract class AbstractCustomerModel extends StripeModel
     protected ?string $defaultSource = null;
 
     #[StripeObjectParam]
-    protected ?string $delinquent = null;
+    protected ?bool $delinquent = null;
 
     #[StripeObjectParam]
     protected ?string $email = null;
@@ -83,12 +83,12 @@ abstract class AbstractCustomerModel extends StripeModel
         return $this;
     }
 
-    public function getDelinquent(): ?string
+    public function getDelinquent(): ?bool
     {
         return $this->delinquent;
     }
 
-    public function setDelinquent(?string $delinquent): static
+    public function setDelinquent(?bool $delinquent): static
     {
         $this->delinquent = $delinquent;
 
