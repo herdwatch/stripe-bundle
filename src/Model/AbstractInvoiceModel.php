@@ -103,7 +103,7 @@ abstract class AbstractInvoiceModel extends StripeModel
     protected ?int $tax = null;
 
     #[StripeObjectParam(name: 'tax_percent')]
-    protected ?string $taxPercent = null;
+    protected ?float $taxPercent = null;
 
     #[StripeObjectParam]
     protected ?int $total = null;
@@ -485,12 +485,12 @@ abstract class AbstractInvoiceModel extends StripeModel
         return $this;
     }
 
-    public function getTaxPercent(): ?string
+    public function getTaxPercent(): ?float
     {
         return $this->taxPercent;
     }
 
-    public function setTaxPercent(?string $taxPercent): static
+    public function setTaxPercent(?float $taxPercent): static
     {
         $this->taxPercent = $taxPercent;
 
